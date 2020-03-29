@@ -22,10 +22,25 @@ class Staff extends CI_Controller
                 $this->load->view('templates/sidebar.php');
                 $this->load->view('staff/profile', $content);
                 $this->load->view('templates/footer.php');
-            }
-            elseif($_SESSION['role'] == 'hod') {
+            } elseif ($_SESSION['role'] == 'hod') {
 
                 $content['sdetails'] = $this->profile_model->fetch_hdetails($_SESSION['staff_id']);
+
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('staff/profile', $content);
+                $this->load->view('templates/footer.php');
+            } elseif ($_SESSION['role'] == 'principal') {
+
+                $content['sdetails'] = $this->profile_model->fetch_pdetails($_SESSION['staff_id']);
+
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('staff/profile', $content);
+                $this->load->view('templates/footer.php');
+            } elseif ($_SESSION['role'] == 'office') {
+
+                $content['sdetails'] = $this->profile_model->fetch_odetails($_SESSION['staff_id']);
 
                 $this->load->view('templates/header.php');
                 $this->load->view('templates/sidebar.php');
@@ -40,7 +55,7 @@ class Staff extends CI_Controller
     public function approve($arequest_id)
     {
         if (isset($_SESSION['username'])) {
-            if ($_SESSION['role'] == 'advisor'||$_SESSION['role'] == 'hod') {
+            if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod' || $_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
                 $content['arequest_id'] = $arequest_id;
                 $admission_no = $this->request_model->fetch_admno($arequest_id);
                 $content['admission_no'] = $admission_no;
@@ -92,7 +107,7 @@ class Staff extends CI_Controller
     public function mystudent($admission_no)
     {
         if (isset($_SESSION['username'])) {
-            if ($_SESSION['role'] == 'advisor'||$_SESSION['role'] == 'hod') {
+            if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod') {
 
                 $content['myclass'] = $this->myclass_model->fetch_spersonal($admission_no);
                 $this->load->view('templates/header.php');

@@ -24,7 +24,7 @@ class request_model extends CI_Model
         $this->db->insert('flows', $data);
     }
 
-    public function doc_upload($admission_no,$dtype,$dpath)
+    public function doc_upload($admission_no, $dtype, $dpath)
     {
         $data = array(
             'dtype' => $dtype,
@@ -37,6 +37,14 @@ class request_model extends CI_Model
         return $doc_id;
     }
 
-    
-    
+    public function fetch_docs($admission_no, $dtype)
+    {
+        $this->db->select('COUNT(*) as c ');
+        $this->db->where('dtype' , $dtype);
+        $this->db->where('owner=' . $admission_no);
+        $this->db->from('doc_path');
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row->c;
+    }
 }

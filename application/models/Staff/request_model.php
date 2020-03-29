@@ -11,6 +11,12 @@ class request_model extends CI_Model
         } elseif ($_SESSION['role'] == 'hod') {
             $this->db->set('hod', 1, FALSE);
             $this->db->set('h_remarks', $remarks);
+        } elseif ($_SESSION['role'] == 'principal') {
+            $this->db->set('principal', 1, FALSE);
+            $this->db->set('p_remarks', $remarks);
+        } elseif ($_SESSION['role'] == 'office') {
+            $this->db->set('office', 1, FALSE);
+            $this->db->set('o_remarks', $remarks);
         }
         $this->db->where('request_id', $request_id);
         $this->db->update('flows');

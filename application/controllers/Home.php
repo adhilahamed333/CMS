@@ -57,7 +57,7 @@ class Home extends CI_Controller
                 );
             } elseif ($role == 'advisor') {
                 $staff_details = $this->users_model->fetch_staff_details($username, $role);
-                
+
                 $data = array(
                     'username' => $username,
                     'role' => $role,
@@ -68,7 +68,7 @@ class Home extends CI_Controller
                 );
             } elseif ($role == 'hod') {
                 $staff_details = $this->users_model->fetch_staff_details($username, $role);
-                
+
                 $data = array(
                     'username' => $username,
                     'role' => $role,
@@ -76,8 +76,26 @@ class Home extends CI_Controller
                     'branch_in_charge' => $staff_details->branch_in_charge,
                     'is_logged_in' => true
                 );
-            }
+            } elseif ($role == 'principal') {
+                $staff_details = $this->users_model->fetch_staff_details($username, $role);
 
+                $data = array(
+                    'username' => $username,
+                    'role' => $role,
+                    'staff_id' => $staff_details->staff_id,
+                    'is_logged_in' => true
+                );
+            } elseif ($role == 'office') {
+                $staff_details = $this->users_model->fetch_staff_details($username, $role);
+
+                $data = array(
+                    'username' => $username,
+                    'role' => $role,
+                    'staff_id' => $staff_details->staff_id,
+                    'section_in_charge' => $staff_details->section_in_charge,
+                    'is_logged_in' => true
+                );
+            }
             $this->session->set_userdata($data);
             redirect('home/dash');
         } else // incorrect username or password

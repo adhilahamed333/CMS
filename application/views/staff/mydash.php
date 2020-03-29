@@ -15,6 +15,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <th>Admission number</th>
                 <th>Advisor Remarks</th>
                 <th>HOD Remarks</th>
+                <th>Principal Remarks</th>
+                <th>Office Remarks</th>
                 <th>Status/Action</th>
 
 
@@ -34,18 +36,65 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <td><?= $myrequest->admission_no; ?></td>
                         <td><?php if ($myrequest->advisor == 0) {
                                 if ($_SESSION['role'] == 'advisor') { ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td> <a href="<?php echo base_url() . "index.php/staff/approve/" . $myrequest->request_id; ?>">Verify</a></td>
-                    <?php } else { ?></td><td></td>
-                        <td>Verification pending by Advisor</td><?php
+                    <?php } else { ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Verification pending by Advisor</td>
+                    <?php
 
-                                                            }
-                                                        } elseif ($_SESSION['role'] == 'hod' && $myrequest->advisor == 1 && $myrequest->hod == 0) {
-                                                            echo $myrequest->a_remarks; ?></td>
-                    <td></td>
-                    <td> <a href="<?php echo base_url() . "index.php/staff/approve/" . $myrequest->request_id; ?>">Verify</a></td>
-                <?php } else {
-                                                            echo $myrequest->a_remarks . '</td><td>' . $myrequest->h_remarks . '</td><td>Verified';
-                                                        } ?></td>
+                                }
+                            } elseif ($myrequest->advisor == 1 && $myrequest->hod == 0) {
+                                echo $myrequest->a_remarks; ?></td>
+                    <?php if ($_SESSION['role'] == 'hod') { ?>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> <a href="<?php echo base_url() . "index.php/staff/approve/" . $myrequest->request_id; ?>">Verify</a></td>
+                    <?php } else { ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Verification pending by HOD</td>
+                    <?php
+                                }
+                            } elseif ($myrequest->advisor == 1 && $myrequest->hod == 1 && $myrequest->principal == 0) {
+                                echo $myrequest->a_remarks; ?></td>
+                    <td><?php echo $myrequest->h_remarks; ?></td>
+                    <?php if ($_SESSION['role'] == 'principal') { ?>
+                        <td></td>
+                        <td></td>
+                        <td> <a href="<?php echo base_url() . "index.php/staff/approve/" . $myrequest->request_id; ?>">Verify</a></td>
+                    <?php } else { ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+
+                        <td>Verification pending by Principal</td>
+                    <?php }
+                            } elseif ($myrequest->advisor == 1 && $myrequest->hod == 1 && $myrequest->principal == 1 && $myrequest->office == 0) {
+                                echo $myrequest->a_remarks; ?></td>
+                    <td><?php echo $myrequest->h_remarks; ?></td>
+                    <td><?php echo $myrequest->p_remarks; ?></td>
+                    <?php if ($_SESSION['role'] == 'office') { ?>
+                        
+                        <td></td>
+                        <td> <a href="<?php echo base_url() . "index.php/staff/approve/" . $myrequest->request_id; ?>">Verify</a></td>
+                    <?php } else { ?>
+                        </td>
+                        <td></td>
+                        
+
+                        <td>Verification pending by Office</td>
+                <?php }
+                            } else {
+                                echo $myrequest->a_remarks . '</td><td>' . $myrequest->h_remarks . '</td><td>' . $myrequest->p_remarks . '</td><td>' . $myrequest->o_remarks  . '</td><td>Verified';
+                            } ?></td>
                     </tr>
                 <?php } ?>
             <?php } ?>
@@ -75,7 +124,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <td><?= $mydoc->name; ?></td>
 
                         <td><?php if ($mydoc->verified == 0) {
-                            ?> <a href="<?php echo base_url() . "index.php/staff/verifydoc/" . $mydoc->doc_id; ?>">Verify</a></td>
+                            ?> </td><td><a href="<?php echo base_url() . "index.php/staff/verifydoc/" . $mydoc->doc_id; ?>">Verify</a></td>
                     <?php } else {
                                 echo $mydoc->remarks . '</td><td>Verified';
                             } ?></td>

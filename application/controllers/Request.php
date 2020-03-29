@@ -22,7 +22,7 @@ class Request extends CI_Controller
             $this->load->view('templates/header.php');
             $this->load->view('templates/sidebar.php');
 
-            $this->load->model('request_model');
+            $this->load->model('student/request_model');
             $request = $this->input->post('request');
             $request = $this->input->post('other') . $request;
             $reason = $this->input->post('reason');
@@ -46,7 +46,13 @@ class Request extends CI_Controller
 
             $this->load->library('upload', $config);
             if ($dtype) {
-                $uploaded = $this->upload->do_upload('userfile');
+                $c = $this->request_model->fetch_docs($_SESSION['admission_no'], $dtype);
+                if ($c == 0) {
+                    $uploaded = $this->upload->do_upload('userfile');
+                } else {
+                    $uploaded = 0;
+                    $content['error_msg'] = $content['error_msg'] . "<br>Document already exists";
+                }
             } else {
                 $uploaded = 0;
                 $content['error_msg'] = $content['error_msg'] . "<br>Enter document type";
@@ -60,7 +66,7 @@ class Request extends CI_Controller
                 $dpath = $this->upload->data('full_path');
                 $content['doc_id'] = $this->request_model->doc_upload($_SESSION['admission_no'], $dtype, $dpath);
                 $this->load->view('student/request/request_s2', $content);
-            } elseif ($request && $reason && $u1 && $u2 && $u3 && $u4 && $u5 && $uploaded) {
+            } elseif ($request && $reason && $u1 && $u2 && $u3 && $u4 && $u5) {
                 $content['request_id'] = $this->request_model->create_request($data, $_SESSION['admission_no']);
                 $this->request_model->request_flow($content['request_id']);
                 $content['doc_id'] = 0;

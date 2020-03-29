@@ -46,6 +46,10 @@ class users_model extends CI_Model
             $this->db->from('advisor_details');
         } elseif ($role == 'hod') {
             $this->db->from('hod_details');
+        } elseif ($role == 'principal') {
+            $this->db->from('principal_details');
+        } elseif ($role == 'office') {
+            $this->db->from('office_details');
         }
         $query = $this->db->get();
         $row = $query->row();
