@@ -11,3 +11,4 @@ if ($doc_id) { ?><br>
     echo $doc_id;
 }
 ?><br>
+<p style="color: red">Do not Refresh Page</p>

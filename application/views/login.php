@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-?>
-<div class="login col-sm-8 text-left">
+?><div class="login col-sm-3 text-center"></div>
+<div class="login col-sm-6 text-center">
     <h1>Login</h1>
     <?php echo form_open('home/validate_login'); ?>
     <div class="form-group">
@@ -19,3 +19,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
     
 
 </div>
+<div class="login col-sm-3 text-center"></div>

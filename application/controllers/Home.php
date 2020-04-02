@@ -9,7 +9,6 @@ class Home extends CI_Controller
     {
         $data['message_error'] = '';
         $this->load->view('templates/header.php');
-        $this->load->view('templates/sidebar.php');
         $this->load->view('login.php', $data);
         $this->load->view('templates/footer.php');
     }
@@ -102,7 +101,6 @@ class Home extends CI_Controller
         {
             $data['message_error'] = 'Invalid credentials';
             $this->load->view('templates/header.php');
-            $this->load->view('templates/sidebar.php');
             $this->load->view('login.php', $data);
             $this->load->view('templates/footer.php');
         }

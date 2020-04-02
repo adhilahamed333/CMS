@@ -52,13 +52,14 @@ class Staff extends CI_Controller
         }
     }
 
-    public function approve($arequest_id)
+    public function action($arequest_id)
     {
         if (isset($_SESSION['username'])) {
             if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod' || $_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
                 $content['arequest_id'] = $arequest_id;
-                $admission_no = $this->request_model->fetch_admno($arequest_id);
-                $content['admission_no'] = $admission_no;
+                $content['admission_no'] = $this->request_model->fetch_admno($arequest_id);
+                $content['status'] = $this->request_model->fetch_status($arequest_id);
+                $content['requests'] = $this->request_model->fetch_return($arequest_id);
                 $this->load->view('templates/header.php');
                 $this->load->view('templates/sidebar.php');
                 $this->load->view('staff/remark', $content);
@@ -78,14 +79,67 @@ class Staff extends CI_Controller
 
 
 
-    public function remark()
+    public function a_remark()
     {
         $remarks = $this->input->post('remark');
         $arequest_id = $this->input->post('arequest_id');
         $this->request_model->approve($arequest_id, $remarks, $_SESSION['username']);
+        if ($_SESSION['role'] == 'office') {
+            redirect('staff/action/' . $arequest_id);
+        } else {
+            redirect('mydash');
+        }
+    }
+
+    public function r_remark()
+    {
+        $remarks = $this->input->post('remark');
+        $arequest_id = $this->input->post('arequest_id');
+        $this->request_model->reject($arequest_id, $remarks, $_SESSION['username']);
         redirect('mydash');
     }
 
+
+    public function view_request($arequest_id)
+    {
+        if (isset($_SESSION['username'])) {
+            if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod' || $_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
+                $content['request'] = $this->request_model->fetch_request($arequest_id);
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('staff/view_request', $content);
+                $this->load->view('templates/footer.php');
+            }
+        } else {
+            redirect('home/login');
+        }
+    }
+
+    public function issue_request($arequest_id)
+    {
+        if (isset($_SESSION['username'])) {
+            if ($_SESSION['role'] == 'office') {
+                $return = $this->input->post('return');
+                $this->request_model->issue($arequest_id, $return);
+                redirect('mydash');
+            }
+        } else {
+            redirect('home/login');
+        }
+    }
+
+    public function verify_return($arequest_id)
+    {
+        if (isset($_SESSION['username'])) {
+            if ($_SESSION['role'] == 'office') {
+                $this->request_model->verify_return($arequest_id);
+                $this->request_model->complete($arequest_id);
+                redirect('mydash');
+            }
+        } else {
+            redirect('home/login');
+        }
+    }
 
     public function myclass()
     {

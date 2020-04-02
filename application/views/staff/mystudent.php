@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 <div class="login col-sm-8 text-left">
-    <h5><a href="<?php echo base_url(); ?>index.php/staff/myclass">My Class</a></h5>
+    
     <h1><?php echo $myclass['name']; ?></h1>
     <h3><a href="<?php echo base_url() . 'index.php/staff/sbasics/' . $myclass['admission_no']; ?>">Basics</a></h3>
     <h3><a href="<?php echo base_url() . 'index.php/staff/spersonal/' . $myclass['admission_no']; ?>">Personal</a></h3>

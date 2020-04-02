@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2020 at 07:20 AM
+-- Generation Time: Apr 02, 2020 at 04:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -31,31 +31,39 @@ SET time_zone = "+00:00";
 CREATE TABLE `flows` (
   `id` int(11) NOT NULL,
   `request_id` int(11) NOT NULL,
-  `submit` tinyint(1) NOT NULL,
+  `submit` tinyint(1) NOT NULL DEFAULT 0,
+  `submit_date` datetime DEFAULT current_timestamp(),
   `advisor` tinyint(1) NOT NULL,
+  `advisor_id` varchar(255) NOT NULL,
   `a_remarks` varchar(255) NOT NULL,
+  `a_date` datetime DEFAULT NULL,
   `hod` tinyint(1) NOT NULL,
+  `hod_id` varchar(255) NOT NULL,
   `h_remarks` varchar(255) NOT NULL,
+  `h_date` datetime DEFAULT NULL,
   `principal` tinyint(1) NOT NULL,
+  `principal_id` varchar(255) NOT NULL,
   `p_remarks` varchar(255) NOT NULL,
+  `p_date` datetime DEFAULT NULL,
   `office` tinyint(1) NOT NULL,
+  `office_id` varchar(255) NOT NULL,
   `o_remarks` varchar(255) NOT NULL,
-  `completed` tinyint(1) NOT NULL DEFAULT 0
+  `o_date` datetime DEFAULT NULL,
+  `issued` tinyint(1) NOT NULL DEFAULT 0,
+  `issue_date` datetime DEFAULT NULL,
+  `receipt` tinyint(1) NOT NULL DEFAULT 0,
+  `receipt_date` datetime DEFAULT NULL,
+  `completed` tinyint(1) NOT NULL DEFAULT 0,
+  `c_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `flows`
 --
 
-INSERT INTO `flows` (`id`, `request_id`, `submit`, `advisor`, `a_remarks`, `hod`, `h_remarks`, `principal`, `p_remarks`, `office`, `o_remarks`, `completed`) VALUES
-(41, 54, 1, 1, 'done By anju_advisor', 1, 'did By madhu_hod', 0, '', 0, '', 0),
-(42, 55, 1, 1, 'ok By anju_advisor', 1, 'done By madhu_hod', 1, 'done By principal', 0, '', 0),
-(44, 57, 1, 1, 'ok By anju_advisor', 1, 'ok By madhu_hod', 0, '', 0, '', 0),
-(45, 58, 1, 0, '', 0, '', 0, '', 0, '', 0),
-(46, 59, 1, 1, 'did By anju_advisor', 0, '', 0, '', 0, '', 0),
-(54, 67, 1, 0, '', 0, '', 0, '', 0, '', 0),
-(55, 68, 1, 0, '', 0, '', 0, '', 0, '', 0),
-(56, 69, 1, 0, '', 0, '', 0, '', 0, '', 0);
+INSERT INTO `flows` (`id`, `request_id`, `submit`, `submit_date`, `advisor`, `advisor_id`, `a_remarks`, `a_date`, `hod`, `hod_id`, `h_remarks`, `h_date`, `principal`, `principal_id`, `p_remarks`, `p_date`, `office`, `office_id`, `o_remarks`, `o_date`, `issued`, `issue_date`, `receipt`, `receipt_date`, `completed`, `c_date`) VALUES
+(70, 83, 1, '2020-04-02 15:21:15', 1, 'anju_advisor', 'done', '2020-04-02 15:21:46', 1, 'madhu_hod', 'did', '2020-04-02 15:23:27', 1, 'principal', 'done', '2020-04-02 15:23:39', 1, 'office_1', 'ready', '2020-04-02 15:23:51', 1, '2020-04-02 15:33:00', 1, '2020-04-02 19:22:12', 1, '2020-04-02 19:22:12'),
+(71, 84, 1, '2020-04-02 18:58:47', -1, 'anju_advisor', 'fail', '2020-04-02 19:30:05', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, NULL, 0, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,22 +77,18 @@ CREATE TABLE `requests` (
   `owner` int(11) NOT NULL,
   `reason` varchar(255) NOT NULL,
   `remarks` varchar(511) NOT NULL,
-  `submit_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `return_applicable` tinyint(1) NOT NULL DEFAULT 0,
+  `returned` tinyint(1) NOT NULL DEFAULT 0,
+  `return_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`request_id`, `type`, `owner`, `reason`, `remarks`, `submit_date`) VALUES
-(54, 'Course completion/studying', 6079, 'Scholarship', 'done', '2020-03-21 09:24:53'),
-(55, 'Transfer', 6079, 'Scholarship', 'chummaa', '2020-03-23 05:57:14'),
-(57, 'Transfer', 6079, 'Scholarship', 'chummaa', '2020-03-23 05:58:47'),
-(58, 'Transfer', 6079, 'Scholarship', 'chummaa', '2020-03-23 05:59:19'),
-(59, 'Refund of fees', 6079, 'Scholarship', '', '2020-03-23 06:03:50'),
-(67, 'Course completion/studying', 6000, 'Scholarship', 'done', '2020-03-28 14:38:25'),
-(68, 'Course completion/studying', 6000, 'Scholarship', 'done', '2020-03-28 14:39:47'),
-(69, 'Transfer', 6500, 'khkuhh', '', '2020-03-28 14:42:56');
+INSERT INTO `requests` (`request_id`, `type`, `owner`, `reason`, `remarks`, `return_applicable`, `returned`, `return_date`) VALUES
+(83, 'Refund of fees', 6079, 'Scholarship', 'chumma', 1, 1, '2020-04-02 15:33:15'),
+(84, 'Transfer', 6079, 'Scholarship', 'done', 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +106,7 @@ CREATE TABLE `student_academic_entrys` (
   `total_marks_secured` int(11) NOT NULL,
   `max_mark` int(11) NOT NULL,
   `tc_or_cc_no` varchar(255) NOT NULL,
-  `date_of_tc_or_cc` date NOT NULL
+  `date_of_tc_or_cc` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -123,6 +127,8 @@ CREATE TABLE `student_academic_exits` (
   `admission_no` int(11) NOT NULL,
   `cgpa` float DEFAULT NULL,
   `year_of_graduation` date DEFAULT NULL,
+  `tc_no` varchar(255) NOT NULL,
+  `tc_issue_date` date DEFAULT NULL,
   `conduct_and_chara` varchar(255) DEFAULT NULL,
   `rank_in_class` int(11) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL
@@ -132,8 +138,8 @@ CREATE TABLE `student_academic_exits` (
 -- Dumping data for table `student_academic_exits`
 --
 
-INSERT INTO `student_academic_exits` (`id`, `admission_no`, `cgpa`, `year_of_graduation`, `conduct_and_chara`, `rank_in_class`, `remarks`) VALUES
-(1, 6079, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `student_academic_exits` (`id`, `admission_no`, `cgpa`, `year_of_graduation`, `tc_no`, `tc_issue_date`, `conduct_and_chara`, `rank_in_class`, `remarks`) VALUES
+(1, 6079, NULL, NULL, '', '0000-00-00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -170,8 +176,8 @@ CREATE TABLE `student_basics` (
   `branch` varchar(255) NOT NULL,
   `semester` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `date_of_joining` date NOT NULL,
-  `date_of_leaving` date NOT NULL,
+  `date_of_joining` date DEFAULT NULL,
+  `date_of_leaving` date DEFAULT NULL,
   `univercity_reg_no` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -224,7 +230,7 @@ CREATE TABLE `student_personals` (
   `admission_no` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL,
-  `dob` date NOT NULL,
+  `dob` date DEFAULT NULL,
   `phone` bigint(15) DEFAULT NULL,
   `mobile` bigint(20) NOT NULL,
   `address` varchar(511) NOT NULL,
@@ -303,7 +309,8 @@ ALTER TABLE `student_academic_entrys`
 --
 ALTER TABLE `student_academic_exits`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admission_no` (`admission_no`);
+  ADD UNIQUE KEY `admission_no` (`admission_no`),
+  ADD UNIQUE KEY `tc_no` (`tc_no`);
 
 --
 -- Indexes for table `student_admissions`
@@ -349,13 +356,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `flows`
 --
 ALTER TABLE `flows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `student_academic_entrys`

@@ -6,9 +6,13 @@ class mydash_model extends CI_Model
     {
 
         $this->db->select("*");
+        if ($_SESSION['role'] == 'student') {
+            $this->db->where('student_basics.admission_no="' . $_SESSION['admission_no'] . '"');
+        }
         if ($_SESSION['role'] == 'advisor') {
             $this->db->where('student_basics.branch="' . $_SESSION['branch_in_charge'] . '"');
             $this->db->where('student_basics.semester=' . $_SESSION['sem_in_charge']);
+            $this->db->where('flows.submit!=-1');
         }
         if ($_SESSION['role'] == 'hod') {
             $this->db->where('student_basics.branch="' . $_SESSION['branch_in_charge'] . '"');
@@ -19,6 +23,7 @@ class mydash_model extends CI_Model
         }
         if ($_SESSION['role'] == 'office') {
             $this->db->where('flows.principal=1');
+            $this->db->where('section="'. $_SESSION['section_in_charge'] . '"');
             $this->db->join('request_types', 'request_types.type=requests.type');
         }
         $this->db->from('requests');
@@ -47,7 +52,6 @@ class mydash_model extends CI_Model
 
     function getDocs()
     {
-        $this->db->select('*');
         $this->db->where('owner=' . $_SESSION['admission_no']);
         $this->db->where('verified=1');
         $this->db->from('doc_path');
@@ -57,7 +61,6 @@ class mydash_model extends CI_Model
 
     function getpath($id)
     {
-        $this->db->select('*');
         $this->db->where('id=' . $id);
         $this->db->from('doc_path');
         $query = $this->db->get();
