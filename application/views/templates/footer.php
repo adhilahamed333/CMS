@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <footer class="container-fluid text-center">
     <p>Government Engineering College Idukki</p>
 </footer>
-<script src="js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 </body>
 
 </html>

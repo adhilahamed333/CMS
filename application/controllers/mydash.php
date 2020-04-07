@@ -64,7 +64,7 @@ class mydash extends CI_Controller
         if (isset($_SESSION['username'])) {
 
             $this->load->model('mydash_model');
-            $this->load->model('request_model');
+            $this->load->model('student/request_model');
 
             $data['error_msg'] = "";
             $data['doc_id'] = "";

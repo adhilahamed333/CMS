@@ -23,9 +23,10 @@ class mydash_model extends CI_Model
         }
         if ($_SESSION['role'] == 'office') {
             $this->db->where('flows.principal=1');
-            $this->db->where('section="'. $_SESSION['section_in_charge'] . '"');
+            $this->db->where('section="' . $_SESSION['section_in_charge'] . '"');
             $this->db->join('request_types', 'request_types.type=requests.type');
         }
+        $this->db->order_by('submit_date');
         $this->db->from('requests');
         $this->db->join('flows', 'requests.request_id=flows.request_id');
         $this->db->join('student_basics', 'requests.owner=student_basics.admission_no');
@@ -42,6 +43,7 @@ class mydash_model extends CI_Model
             $this->db->where('student_basics.branch="' . $_SESSION['branch_in_charge'] . '"');
             $this->db->where('student_basics.semester=' . $_SESSION['sem_in_charge']);
         }
+        $this->db->order_by('verified');
         $this->db->from('doc_path');
         $this->db->join('student_basics', 'doc_path.owner=student_basics.admission_no');
         $this->db->join('student_personals', 'doc_path.owner=student_personals.admission_no');

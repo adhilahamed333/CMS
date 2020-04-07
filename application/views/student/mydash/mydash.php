@@ -1,34 +1,37 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
-<div class="login col-sm-10 text-center">
-    <h4>Requests</h4>
-    <?php if ($myrequests) { ?>
-        <table border="1">
+<div class="login col-sm-10 text-center" style="float:left;overflow-y:auto;height:100%;">
+    <div class="dashbox">
+        <h4>Requests</h4>
 
-            <?php
+        <?php if ($myrequests) {
             foreach ($myrequests as $myrequest) { ?>
 
-                <tr>
-                    <td >Request ID: <?= $myrequest->request_id; ?></td>
-                </tr>
-                <tr>
-                    <td colspan="2">Certification/Service Requested: <?= $myrequest->type; ?></td>
-                </tr>
-                <tr>
-                    <td>Reason: <?= $myrequest->reason; ?></td>
-                    <?php if ($myrequest->issued == 1 && $myrequest->receipt == 0) {
-                        echo "<td><a href='" . base_url() . "index.php/student/verify_receipt/" . $myrequest->request_id . "'>Verify Receive</a></td>";
-                    }
-                    if (($myrequest->submit == 1 && $myrequest->advisor != 1 && $myrequest->advisor != -1)) {
-                        echo form_open_multipart('student/withdraw_remark');
-                        echo '<td><input type="hidden" name="arequest_id" value=' . $myrequest->request_id . '><input type="text" name="remark"><input type="submit" value="Withdraw"></form></td>';
-                    } ?>
+                <div class="item-card">
+                    <div class="container" style="width:auto">
+                        <div>
+                            <div>Request ID: <?= $myrequest->request_id; ?></div>
+                        </div>
+                        <div>
+                            <div>Certification/Service Requested: <?= $myrequest->type; ?></div>
+                        </div>
+                        <div>
+                            <div>Reason: <?= $myrequest->reason; ?></div>
+                        </div>
+                        <div>
+                            <?php if ($myrequest->issued == 1 && $myrequest->receipt == 0) {
+                                echo "<div><a href='" . base_url() . "index.php/student/verify_receipt/" . $myrequest->request_id . "'>Verify Receive</a></div>";
+                            }
+                            if (($myrequest->submit == 1 && $myrequest->advisor != 1 && $myrequest->advisor != -1)) {
+                                echo form_open_multipart('student/withdraw_remark');
+                                echo '<div><input type="hidden" name="arequest_id" value=' . $myrequest->request_id . '><input type="text" name="remark"><input type="submit" value="Withdraw"></form></div>';
+                            } ?>
 
-                </tr>
-                <tr>
-                    <td colspan="15">
-                        <div class="container">
+                        </div>
+
+
+                        <div>
                             <ul class='progressbar'>
                                 <?php if ($myrequest->submit == 1) { ?><li class="active"><?php } elseif ($myrequest->submit == -1) { ?>
                                     <li class="deactive"><?php } else { ?>
@@ -55,12 +58,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                                 <li><?php } ?>Completed<br><?= $myrequest->c_date; ?></li>
                             </ul>
                         </div>
-                    </td>
-                </tr>
+
+                    </div>
+
+                </div>
         <?php }
         } else {
             echo "<h4>No Requests</h4>";
-        } ?>
-        </table>
+        } ?><br>
+
+    </div><br>
 
 </div>

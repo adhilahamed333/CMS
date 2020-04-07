@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="col-sm-8 text-left">
+<div class="col-sm-10 text-left" class="float:left;overflow-y:auto;height:100%;">
     <h1>Certification/Service Requests</h1>
     <?php echo form_open_multipart('request/request_s1'); ?>
 
@@ -39,7 +39,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <label for="userfile">Attatch documents if applicable:</label>
         <br>Document type:
         <input type="text" name="dtype">
-        <input type="file" name="userfile" size="20"/>
+        <input type="file" name="userfile" size="20" />
     </div>
     <div class="form-group">
         <label>Applicant's Undertaking:</label><br>
