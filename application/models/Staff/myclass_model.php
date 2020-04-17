@@ -2,10 +2,27 @@
 
 class myclass_model extends CI_Model
 {
-    function fetch_class($branch_in_charge, $sem_in__charge)
+    function fetch_a_class($branch_in_charge, $sem_in__charge)
     {
         $this->db->where('branch', $branch_in_charge);
         $this->db->where('semester', $sem_in__charge);
+        $this->db->from('student_basics');
+        $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function fetch_h_class($branch_in_charge)
+    {
+        $this->db->where('branch', $branch_in_charge);
+        $this->db->from('student_basics');
+        $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function fetch_po_class()
+    {
         $this->db->from('student_basics');
         $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
         $query = $this->db->get();
@@ -27,7 +44,7 @@ class myclass_model extends CI_Model
             'username' => $row->username,
             'date_of_joining' => $row->date_of_joining,
             'date_of_leaving' => $row->date_of_leaving,
-            'univercity_reg_no' => $row->univercity_reg_no
+            'university_reg_no' => $row->university_reg_no
         );
         return $data;
     }

@@ -134,8 +134,8 @@ class Staff extends CI_Controller
             if ($_SESSION['role'] == 'office') {
                 $this->request_model->verify_return($arequest_id);
                 $this->request_model->complete($arequest_id);
-                redirect('mydash');
             }
+            redirect('mydash');
         } else {
             redirect('home/login');
         }
@@ -145,14 +145,16 @@ class Staff extends CI_Controller
     {
         if (isset($_SESSION['username'])) {
             if ($_SESSION['role'] == 'advisor') {
-
-                $content['myclass'] = $this->myclass_model->fetch_class($_SESSION['branch_in_charge'], $_SESSION['sem_in_charge']);
-
-                $this->load->view('templates/header.php');
-                $this->load->view('templates/sidebar.php');
-                $this->load->view('staff/myclass', $content);
-                $this->load->view('templates/footer.php');
+                $content['myclass'] = $this->myclass_model->fetch_a_class($_SESSION['branch_in_charge'], $_SESSION['sem_in_charge']);
+            } else if ($_SESSION['role'] == 'hod') {
+                $content['myclass'] = $this->myclass_model->fetch_h_class($_SESSION['branch_in_charge']);
+            } else if ($_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
+                $content['myclass'] = $this->myclass_model->fetch_po_class();
             }
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('staff/myclass', $content);
+            $this->load->view('templates/footer.php');
         } else {
             redirect('home/login');
         }
@@ -161,7 +163,7 @@ class Staff extends CI_Controller
     public function mystudent($admission_no)
     {
         if (isset($_SESSION['username'])) {
-            if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod') {
+            if ($_SESSION['role'] == 'advisor' || $_SESSION['role'] == 'hod' || $_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
 
                 $content['myclass'] = $this->myclass_model->fetch_spersonal($admission_no);
                 $this->load->view('templates/header.php');
@@ -262,7 +264,6 @@ class Staff extends CI_Controller
     {
         if (isset($_SESSION['username'])) {
             $content['acadexit'] = $this->myclass_model->fetch_sacadexit($admission_no);
-
             $this->load->view('templates/header.php');
             $this->load->view('templates/sidebar.php');
             $this->load->view('staff/mystudent/sacadexit', $content);

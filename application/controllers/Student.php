@@ -112,6 +112,9 @@ class Student extends CI_Controller
 
     public function withdraw_remark()
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $remarks = $this->input->post('remark');
         $arequest_id = $this->input->post('arequest_id');
         $this->request_model->withdraw($arequest_id, $remarks, $_SESSION['username']);
@@ -120,9 +123,12 @@ class Student extends CI_Controller
 
     public function verify_receipt($request_id)
     {
-        $this->request_model->verify_receipt($request_id,$_SESSION['username']);
-        $return_applicable=$this->request_model->fetch_return($request_id);
-        if($return_applicable){
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
+        $this->request_model->verify_receipt($request_id, $_SESSION['username']);
+        $return_applicable = $this->request_model->fetch_return($request_id);
+        if (!$return_applicable) {
             $this->request_model->complete($request_id);
         }
         redirect('mydash');

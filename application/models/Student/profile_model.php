@@ -17,7 +17,7 @@ class profile_model extends CI_Model
             'username' => $row->username,
             'date_of_joining' => $row->date_of_joining,
             'date_of_leaving' => $row->date_of_leaving,
-            'univercity_reg_no' => $row->univercity_reg_no
+            'university_reg_no' => $row->university_reg_no
         );
         return $data;
     }

@@ -1,36 +1,61 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
-?>
+public function create_table($data, $sem)
+{
+$this->load->dbforge();
+$fields = array(
+'id' => array(
+'type' => 'INT',
+'constraint' => 5,
+'unsigned' => TRUE,
+'unique' => TRUE,
+'auto_increment' => TRUE
+),
+'university_reg_no' => array(
+'type' => 'VARCHAR',
+'constraint' => 255,
+'unique' => TRUE,
+),
+$data[1] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[2] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[3] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[4] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[5] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[6] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[7] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[8] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[9] => array(
+'type' => 'VARCHAR',
+'constraint' => '100',
+),
+$data[12] => array(
+'type' => 'FLOAT',
+'constraint' => '10',
+),
 
-<div class="login col-sm-8 text-left">
-    <div>
-        <?php echo $doc_id; ?><br></div>
-    <div>
-        <table>
-            <tr>
-                <th>Document ID</th>
-                <th>Type</th>
-            </tr>
-            <?php if ($mydocs) {
-                foreach ($mydocs as $mydoc) { ?>
-
-                    <tr>
-                        <td><?= $mydoc->doc_id; ?></td>
-                        <td><?= $mydoc->dtype; ?></td>
-                        <td><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></td>
-                    </tr>
-            <?php }
-            } ?>
-        </table>
-    </div>
-    <div class=form-group>
-        <?php echo form_open_multipart('mydash/upload_doc'); ?>
-        <label for="userfile">Upload Document:</label>
-        <br>Document type:
-        <input type="text" name="dtype">
-        <input type="file" name="userfile" size="20" />
-        <?php echo $error_msg; ?><br>
-        <input type="submit" value="Upload" class="btn btn-primary">
-        </form>
-    </div>
-</div>
+);
+$this->dbforge->add_field($fields);
+$this->dbforge->create_table($sem, TRUE);
+}

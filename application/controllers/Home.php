@@ -7,6 +7,9 @@ class Home extends CI_Controller
 
     public function login()
     {
+        if (isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $data['message_error'] = '';
         $this->load->view('templates/header.php');
         $this->load->view('login.php', $data);
@@ -36,6 +39,9 @@ class Home extends CI_Controller
 
     public function validate_login()
     {
+        if (isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $this->load->model('users_model');
 
         $username = $this->input->post('username');
@@ -47,10 +53,12 @@ class Home extends CI_Controller
             $role = $this->users_model->fetch_role($username);
             if ($role == 'student') {
                 $admno = $this->users_model->fetch_admno($username);
+                $semester = $this->users_model->fetch_sem($username);
 
                 $data = array(
                     'username' => $username,
                     'role' => $role,
+                    'semester' => $semester,
                     'admission_no' => $admno,
                     'is_logged_in' => true
                 );

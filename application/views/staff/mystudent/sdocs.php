@@ -2,23 +2,22 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-8 text-left">
+<div class="login col-sm-10 text-center">
 
 
-    <table>
-        <tr>
-            <th>Document ID</th>
-            <th>Type</th>
-        </tr>
+    <div class="dashbox">
+        <h5>Documents</h5>
         <?php if ($mydocs) {
             foreach ($mydocs as $mydoc) { ?>
 
-                <tr>
-                    <td><?= $mydoc->doc_id; ?></td>
-                    <td><?= $mydoc->dtype; ?></td>
-                    <td><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></td>
-                </tr>
+                <div class="item-card">
+                    <div><?= $mydoc->doc_id; ?></div>
+                    <div><?= $mydoc->dtype; ?></div>
+                    <div><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>
+                </div>
         <?php }
         } ?>
-    </table>
+        <br>
+    </div>
+
 </div>

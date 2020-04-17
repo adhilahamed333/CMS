@@ -111,6 +111,7 @@ class request_model extends CI_Model
     {
         $this->db->set('returned', 1, FALSE);
         $this->db->set('return_date', 'NOW()', FALSE);
+        $this->db->set('r_remarks', 'Testimonials returned');
         $this->db->where('request_id', $arequest_id);
         $this->db->update('requests');
     }
@@ -124,15 +125,18 @@ class request_model extends CI_Model
     }
 
 
-    public function issue($request_id)
+    public function issue($request_id, $return)
     {
         if ($_SESSION['role'] == 'office') {
             $this->db->set('issued', 1, FALSE);
             $this->db->set('issue_date', 'NOW()', FALSE);
+            if ($return) {
+                $this->db->set('i_remarks', 'Testimonials must be returned');
+            }
             $this->db->where('request_id', $request_id);
             $this->db->update('flows');
 
-            $this->db->set('return_applicable', 1, FALSE);
+            $this->db->set('return_applicable', $return);
             $this->db->where('request_id', $request_id);
             $this->db->update('requests');
         }
@@ -174,7 +178,7 @@ class request_model extends CI_Model
                     <th rowspan="4">3</th>
                     <th rowspan="3">Details of admission to college and hostel</th>
                     <td colspan="2">College Admission</td>
-                    <td rowspan="2">Univercity Registraion no</td>
+                    <td rowspan="2">University Registraion no</td>
                     <td rowspan="2">Current Semester</td>
                     <td colspan="2">Hostel</td>
                 </tr>
@@ -187,7 +191,7 @@ class request_model extends CI_Model
                 <tr>
                     <td> ' . $request->admission_no . '</td>
                     <td> ' . $request->date_of_joining . '</td>
-                    <td> ' . $request->univercity_reg_no . ' </td>
+                    <td> ' . $request->university_reg_no . ' </td>
                     <td>S ' . $request->semester . '</td>
                     <td> ' . $request->hostel_name . '</td>
                     <td> ' . $request->date_of_admission . '</td>

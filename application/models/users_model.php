@@ -39,6 +39,15 @@ class users_model extends CI_Model
         return $row->admission_no;
     }
 
+    function fetch_sem($username)
+    {
+        $this->db->where('username', $username);
+        $this->db->from('student_basics');
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row->semester;
+    }
+
     function fetch_staff_details($username, $role)
     {
         $this->db->where('username', $username);

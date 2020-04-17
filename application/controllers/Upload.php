@@ -11,11 +11,17 @@ class Upload extends CI_Controller
 
     public function index()
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $this->load->view('upload/upload_form', array('error' => ' '));
     }
 
     public function do_upload()
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 100;

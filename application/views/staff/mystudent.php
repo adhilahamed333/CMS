@@ -13,6 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <h3><a href="<?php echo base_url() . 'index.php/staff/sacadentry/' . $myclass['admission_no']; ?>">Acadamic Entry Level</a></h3>
     <h3><a href="<?php echo base_url() . 'index.php/staff/sacadexit/' . $myclass['admission_no']; ?>">Acadamic Exit Level</a></h3>
     <h3><a href="<?php echo base_url() . 'index.php/staff/getDocs/' . $myclass['admission_no']; ?>">Documents</a></h3>
+    <h3><a href="<?php echo base_url() . 'index.php/myresult/staff_access/' . $myclass['admission_no']; ?>">Results</a></h3>
 
 
 </div>

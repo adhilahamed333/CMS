@@ -53,6 +53,9 @@ class mydash extends CI_Controller
 
     public function viewdoc($id)
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $this->load->helper('download');
         $this->load->model('mydash_model');
         $query = $this->mydash_model->getpath($id);

@@ -12,11 +12,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="<?php echo base_url('assets/css/progressbar.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
 
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/js.min.js'); ?>"></script>
     <style type="text/css">
         /*--------------------------------------------------------------*/
 
@@ -91,7 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <input type="submit" name="submit" value="Logout" class="btn btn-primary" style="margin: 8px"></li>
                         </form>
                     <?php } else {
-                        echo '<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+                        echo '<li><a href="' . base_url() . 'index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
                     } ?>
                 </ul>
             </div>

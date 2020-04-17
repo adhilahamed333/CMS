@@ -25,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <th rowspan="4">3</th>
                 <th rowspan="3">Details of admission to college and hostel</th>
                 <td colspan="2">College Admission</td>
-                <td rowspan="2">Univercity Registraion no</td>
+                <td rowspan="2">University Registraion no</td>
                 <td rowspan="2">Current Semester</td>
                 <td colspan="2">Hostel</td>
             </tr>
@@ -38,7 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <tr>
                 <td> <?= $request->admission_no; ?></td>
                 <td> <?= $request->date_of_joining; ?></td>
-                <td> <?= $request->univercity_reg_no; ?> </td>
+                <td> <?= $request->university_reg_no; ?> </td>
                 <td>S<?= $request->semester; ?></td>
                 <td> <?= $request->hostel_name; ?></td>
                 <td> <?= $request->date_of_admission; ?></td>

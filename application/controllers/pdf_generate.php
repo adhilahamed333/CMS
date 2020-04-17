@@ -12,6 +12,9 @@ class pdf_generate extends CI_Controller
 
     public function print_req($arequest_id)
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $content = $this->request_model->print_request($arequest_id);
 
         $this->pdf->loadHtml($content);
@@ -20,8 +23,11 @@ class pdf_generate extends CI_Controller
     }
     public function v_req($arequest_id)
     {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
         $content['data'] = $this->request_model->print_request($arequest_id);
 
-        $this->load->view('htmltopdf',$content);
+        $this->load->view('htmltopdf', $content);
     }
 }

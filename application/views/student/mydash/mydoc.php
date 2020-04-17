@@ -9,12 +9,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="item-card">
                 <?php echo $doc_id; ?><br></div>
         <?php } ?>
-        <div class="item-card">
+        <div>
             <div>
                 <?php if ($mydocs) {
                     foreach ($mydocs as $mydoc) { ?>
 
-                        <div>
+                        <div  class="item-card">
                             <div>Document ID:<?= $mydoc->doc_id; ?></div>
                             <div>Type:<?= $mydoc->dtype; ?></div>
                             <div><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>

@@ -1,10 +1,12 @@
 .dashbox {
     background-color: #eee;
     border-radius: 10px;
+    padding-left: 10px;
 }
 .item-card {
     width: inherit;
     margin: 10px;
+    padding-left: 10px;
     background-color: white;
     border-radius: 10px;
 }
@@ -25,11 +27,10 @@
 }
 
 .progressbar li:before {
-    content: counter(step);
-    counter-increment: step;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    content:url('clock.svg');
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     border: 1px solid #ddd;
     display: block;
     text-align: center;
@@ -56,10 +57,12 @@
 
 .progressbar li.active {
     color: green;
+    
 }
 
 .progressbar li.active:before {
-    border-color: green;
+    
+    content: url(tick.svg);
 }
 
 .progressbar li.active:after {
@@ -71,7 +74,8 @@
 }
 
 .progressbar li.deactive:before {
-    border-color: red;
+    
+    content: url(close.svg);
 }
 
 .progressbar li.deactive:after {

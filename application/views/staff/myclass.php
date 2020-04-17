@@ -2,35 +2,34 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-8 text-left">
-    <h1>My Class(<?php
-                    echo $_SESSION['branch_in_charge'] . ', S' . $_SESSION['sem_in_charge'];
-                    ?>):</h1>
-    <table>
-        <tr>
-            <th>Admission Number</th>
-            <th>Name</th>
-            <th>Cousre</th>
-            <th>Branch</th>
-            <th>Semester</th>
-            <th>Univercity Registration Number</th>
-            <th></th>
-        </tr>
-        <?php if ($myclass) {
-            foreach ($myclass as $myclasses) { ?>
+<div class="login col-sm-10 text-left">
+    <h1>My Class<?php if ($_SESSION['role'] == 'advisor') {
+                    echo '(' . $_SESSION['branch_in_charge'] . ', S' . $_SESSION['sem_in_charge'] . ')';
+                } else if ($_SESSION['role'] == 'hod') {
+                    echo '(' . $_SESSION['branch_in_charge'] . ')';
+                }
+                ?></h1>
+    <h3><a href="<?php echo base_url(); ?>index.php/result_upload">Upload Result</a></h3>
+    <div class="dashbox">
+        <br>
+        <div style="width:inherit;overflow-y:auto;height:100%;">
+            <?php if ($myclass) {
 
-                <tr>
-                    <td><?= $myclasses->admission_no; ?></td>
-                    <td><?= $myclasses->name; ?></td>
-                    <td><?= $myclasses->course; ?></td>
-                    <td><?= $myclasses->branch; ?></td>
-                    <td><?= $myclasses->semester; ?></td>
-                    <td><?= $myclasses->univercity_reg_no; ?></td>
-                    <td><a href="<?php echo base_url()."index.php/staff/mystudent/".$myclasses->admission_no; ?>">More...</a></td>
-                </tr>
-        <?php }
-        } ?>
-    </table>
+                foreach ($myclass as $myclasses) { ?>
+
+                    <div class="item-card">
+                        <div>Admission no: <?= $myclasses->admission_no; ?></div>
+                        <div>Name: <?= $myclasses->name; ?></div>
+                        <div>Course: <?= $myclasses->course; ?></div>
+                        <div>Branch: <?= $myclasses->branch; ?></div>
+                        <div>Semester: S<?= $myclasses->semester; ?></div>
+                        <div>Univercity Reg No: <?= $myclasses->university_reg_no; ?></div>
+                        <div><a href="<?php echo base_url() . "index.php/staff/mystudent/" . $myclasses->admission_no; ?>">More...</a></div>
+                    </div>
+            <?php }
+            } ?><br>
+        </div>
+    </div>
 
 
 
