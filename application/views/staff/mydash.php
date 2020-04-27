@@ -21,39 +21,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div><?php if ($myrequest->advisor == 0) {
                                         if ($_SESSION['role'] == 'advisor') { ?>
-                                        <div> <a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                        <div> <a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                     <?php } else { ?>
                                         <div>Verification pending by Advisor</div>
 
 
                                     <?php }
                                     } elseif ($myrequest->advisor == -1) { ?>
-                                    <div> <a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                    <div> <a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                     <?php } elseif ($myrequest->advisor == 1 && $myrequest->hod == 0) {
                                         if ($_SESSION['role'] == 'hod') { ?>
-                                        <div><a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                        <div><a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                     <?php } else { ?>
                                         <div>Verification pending by HOD</div>
 
                                     <?php }
                                     } elseif ($myrequest->advisor == 1 && $myrequest->hod == 1 && $myrequest->principal == 0) {
                                         if ($_SESSION['role'] == 'principal') { ?>
-                                        <div><a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                        <div><a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                     <?php } else { ?>
                                         <div>Verification pending by Principal</div>
                                     <?php }
                                     } elseif ($myrequest->advisor == 1 && $myrequest->hod == 1 && $myrequest->principal == 1 && $myrequest->office == 0) {
                                         if ($_SESSION['role'] == 'office') { ?>
-                                        <div><a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                        <div><a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                     <?php } else { ?>
 
                                         <div>Verification pending by Office</div>
                                     <?php }
                                     } else if ($_SESSION['role'] == 'office' && $myrequest->completed == 0) { ?>
-                                    <div><a href="<?php echo base_url() . "index.php/staff/action/" . $myrequest->request_id; ?>">View</a></div>
+                                    <div><a href="<?php echo base_url() . "staff/action/" . $myrequest->request_id; ?>">View</a></div>
                                 <?php } else { ?>
-                                    <div><a href="<?php echo base_url() . 'index.php/staff/view_request/' . $myrequest->request_id; ?> ">View request</a></div>
-                                    <div><a href="<?php echo base_url() . 'index.php/pdf_generate/print_req/' . $myrequest->request_id; ?>">Print request</a></div>
+                                    <div><a href="<?php echo base_url() . 'staff/view_request/' . $myrequest->request_id; ?> ">View request</a></div>
+                                    <div><a href="<?php echo base_url() . 'pdf_generate/print_req/' . $myrequest->request_id; ?>">Print request</a></div>
                                 <?php } ?>
                             </div>
                             <div>
@@ -109,11 +109,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div>Name:<?= $mydoc->name; ?></div>
                             <div>Admission no:<?= $mydoc->owner; ?></div>
                             <?php if ($mydoc->verified == 0) { ?>
-                                <div><a href="<?php echo base_url() . "index.php/staff/verifydoc/" . $mydoc->doc_id; ?>">Verify</a></div>
+                                <div><a href="<?php echo base_url() . "/staff/verifydoc/" . $mydoc->doc_id; ?>">Verify</a></div>
                             <?php } else {
                                 echo '<div>Verified</div>' . $mydoc->remarks;
                             } ?>
-                            <div><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>
+                            <div><a href="<?php echo base_url() . 'mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>
                         </div>
                 <?php }
                 } else {

@@ -34,6 +34,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
         </div>
+        <div>
+            <?php echo form_open('home/password_change'); ?>
+
+            <input type="submit" name="submit" value="Change Password" class="btn btn-primary">
+
+            </form>
+        </div>
         <br>
     </div>
+
 </div>

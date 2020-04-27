@@ -64,4 +64,11 @@ class users_model extends CI_Model
         $row = $query->row();
         return $row;
     }
+
+    function update_password($username, $np)
+    {
+        $this->db->set('password', $np);
+        $this->db->where('username', $username);
+        $this->db->update('users');
+    }
 }

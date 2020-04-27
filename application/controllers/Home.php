@@ -130,12 +130,59 @@ class Home extends CI_Controller
         }
     }
 
-
-
-
-    function logout()
+    public function logout()
     {
         $this->session->sess_destroy();
         redirect('home/login');
+    }
+
+    public function password_change()
+    {
+        if (isset($_SESSION['username'])) {
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $data['message_error'] = '';
+            $this->load->view('change_password.php', $data);
+            $this->load->view('templates/footer.php');
+        } else {
+            redirect('home/login');
+        }
+    }
+
+    public function update_password()
+    {
+        if (isset($_SESSION['username'])) {
+            $this->load->model('users_model');
+
+            $username = $this->input->post('username');
+            $op = $this->input->post('op');
+
+            $password = md5($op);
+            $is_valid = $this->users_model->validate($username, $password);
+
+            if ($is_valid) {
+                $np = $this->input->post('np');
+                $cp = $this->input->post('cp');
+                if ($np == $cp && $np != '' && $cp != '') {
+                    $np = md5($np);
+                    $this->users_model->update_password($username, $np);
+                    redirect('home/dash');  
+                } else {
+                    $data['message_error'] = 'Passwords Donot Match';
+                    $this->load->view('templates/header.php');
+                    $this->load->view('templates/sidebar.php');
+                    $this->load->view('change_password', $data);
+                    $this->load->view('templates/footer.php');
+                }
+            } else {
+                $data['message_error'] = 'Old Password Incorrect';
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('change_password', $data);
+                $this->load->view('templates/footer.php');
+            }
+        } else {
+            redirect('home/login');
+        }
     }
 }

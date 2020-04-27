@@ -9,7 +9,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     echo '(' . $_SESSION['branch_in_charge'] . ')';
                 }
                 ?></h1>
-    <h3><a href="<?php echo base_url(); ?>index.php/result_upload">Upload Result</a></h3>
+    <h3><a href="<?php echo base_url(); ?>result_upload">Upload Result</a></h3>
+    
     <div class="dashbox">
         <br>
         <div style="width:inherit;overflow-y:auto;height:100%;">
@@ -24,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div>Branch: <?= $myclasses->branch; ?></div>
                         <div>Semester: S<?= $myclasses->semester; ?></div>
                         <div>Univercity Reg No: <?= $myclasses->university_reg_no; ?></div>
-                        <div><a href="<?php echo base_url() . "index.php/staff/mystudent/" . $myclasses->admission_no; ?>">More...</a></div>
+                        <div><a href="<?php echo base_url() . "staff/mystudent/" . $myclasses->admission_no; ?>">More...</a></div>
                     </div>
             <?php }
             } ?><br>

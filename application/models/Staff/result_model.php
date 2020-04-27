@@ -4,10 +4,10 @@ class result_model extends CI_Model
     public function insert_record($fields, $data, $n)
     {
 
-        if ($data[0][10] == '-') {
-            $university_reg_no = substr($data[0], 0, 10);
-        } else {
+        if ($data[0][0] == 'L') {
             $university_reg_no = substr($data[0], 0, 11);
+        } else {
+            $university_reg_no = substr($data[0], 0, 10);
         }
 
         for ($i = 1; $i <= $n; $i++) {
@@ -29,10 +29,13 @@ class result_model extends CI_Model
                     $this->db->insert('results', $content);
                 }
             } else {
-                $this->db->set('grade', $grade);
-                $this->db->where('university_reg_no', $univerity_reg_no);
-                $this->db->where('course_code', $fields[$i]);
-                $this->db->update('results');
+                if ($grade != 'AB') {
+                    $this->db->set('grade', $grade);
+
+                    $this->db->where('university_reg_no', $university_reg_no);
+                    $this->db->where('course_code', $fields[$i]);
+                    $this->db->update('results');
+                }
             }
         }
     }
@@ -69,7 +72,9 @@ class result_model extends CI_Model
                 'P' => 5,
                 'F' => 0,
                 'FE' => 0,
-                'I' => 0
+                'I' => 0,
+                'Absent' => 0,
+                'AB' => 0
             );
             $sgpa = array();
             $c = array();
@@ -81,9 +86,6 @@ class result_model extends CI_Model
                     if ($row->semester == $i && $row->grade != NULL) {
                         $gpa += $row->credits * $grade_points[$row->grade];
                         $c[$i] += $row->credits;
-                        if ($row->semester == 7) {
-                            echo "***";
-                        }
                     }
                 }
                 if ($c[$i] != 0) {
@@ -113,11 +115,21 @@ class result_model extends CI_Model
                     $s++;
                 }
             }
+            $temp = round($temp / $s, 2);
             if ($s != 0) {
-                $this->db->set('cgpa', $temp / $s);
+                $this->db->set('cgpa', $temp);
                 $this->db->where('admission_no', $row->admission_no);
                 $this->db->update('student_academic_exits');
             }
         }
+    }
+
+    public function fetch_cgpa($admission_no)
+    {
+        $this->db->where('admission_no', $admission_no);
+        $this->db->from('student_academic_exits');
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row->cgpa;
     }
 }

@@ -79,9 +79,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <?php if (isset($_SESSION['username'])) { ?>
-                        <li><a href="<?php echo base_url(); ?>index.php/home/dash">Home</a></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/home/profile">Profile</a></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/mydash">My Dashboard</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/dash">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/profile">Profile</a></li>
+                        <li><a href="<?php echo base_url(); ?>mydash">My Dashboard</a></li>
 
                     <?php } ?>
                 </ul>
@@ -89,10 +89,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <?php
                     if (isset($_SESSION['username'])) {
                         echo "<li>" . form_open('home/logout'); ?>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>home/profile"><?= $_SESSION['username'] ?></a>
                         <input type="submit" name="submit" value="Logout" class="btn btn-primary" style="margin: 8px"></li>
                         </form>
                     <?php } else {
-                        echo '<li><a href="' . base_url() . 'index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+                        echo '<li><a href="' . base_url() . '"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
                     } ?>
                 </ul>
             </div>

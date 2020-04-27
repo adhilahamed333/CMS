@@ -15,7 +15,8 @@ class myresult extends CI_Controller
         $this->load->view('templates/header.php');
         $this->load->view('templates/sidebar.php');
         $content['myresults'] = $this->result_model->fetch_myresults($_SESSION['admission_no']);
-        $content['sgpa'] = $this->result_model->fetch_sgpa($_SESSION['admission_no']);
+        $content['sem'] = $this->result_model->fetch_sgpa($_SESSION['admission_no']);
+        $content['cgpa'] = $this->result_model->fetch_cgpa($_SESSION['admission_no']);
         $this->load->view('student/myresult.php', $content);
         $this->load->view('templates/footer.php');
     }
@@ -28,6 +29,7 @@ class myresult extends CI_Controller
         $this->load->view('templates/sidebar.php');
         $content['myresults'] = $this->result_model->fetch_myresults($admission_no);
         $content['sem'] = $this->result_model->fetch_sgpa($admission_no);
+        $content['cgpa'] = $this->result_model->fetch_cgpa($admission_no);
         $this->load->view('student/myresult.php', $content);
         $this->load->view('templates/footer.php');
     }

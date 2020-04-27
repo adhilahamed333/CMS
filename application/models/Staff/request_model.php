@@ -155,6 +155,10 @@ class request_model extends CI_Model
 
         $query = $this->db->get();
         $request = $query->row();
+        $tc_issue_date ="";
+        if (!$request->tc_issue_date == '0000-00-00'&&!$request->tc_issue_date == NULL) {
+            $tc_issue_date = date('d/m/Y', strtotime($request->tc_issue_date));
+        }
         $output = '<h2 style="align-items: center">GOVERNMENT ENGINEERING COLLEGE IDUKKI</h2>
         <h9 style="align-items: center">APPLICATION FOR RECOMMENDATION/ATTESTATION/CERTIFICATES/RETURN OF TESTIMONIALS/REFUND OF FEES</h9>
         <div>
@@ -190,17 +194,17 @@ class request_model extends CI_Model
                 </tr>
                 <tr>
                     <td> ' . $request->admission_no . '</td>
-                    <td> ' . $request->date_of_joining . '</td>
+                    <td> ' . date('d/m/Y', strtotime($request->date_of_joining)) . '</td>
                     <td> ' . $request->university_reg_no . ' </td>
-                    <td>S ' . $request->semester . '</td>
+                    <td>S' . $request->semester . '</td>
                     <td> ' . $request->hostel_name . '</td>
-                    <td> ' . $request->date_of_admission . '</td>
+                    <td> ' . date('d/m/Y', strtotime($request->date_of_admission)) . '</td>
                 </tr>
                 <tr>
                     <th>TC No. & Date</th>
                     <td colspan="2"> ' . $request->tc_no . '</td>
                     <td colspan="6">
-                        ' . $request->tc_issue_date . '</td>
+                        ' . $tc_issue_date . '</td>
                 </tr>
                 <tr>
                     <th>4</th>
@@ -232,9 +236,9 @@ class request_model extends CI_Model
                     <td>Phone:</td>
                     <td>' . $request->mobile . '</td>
                     <td>Date:</td>
-                    <td>' . $request->submit_date . '</td>
+                    <td>' . date('d/m/Y', strtotime($request->submit_date)) . '</td>
                     <td>Date:</td>
-                    <td>' . $request->receipt_date . '</td>
+                    <td>' . date('d/m/Y', strtotime($request->receipt_date)) . '</td>
                 </tr>
                 <tr>
                     <th>7</th>
@@ -246,7 +250,7 @@ class request_model extends CI_Model
                     <th>Dated signature of Tutor/Warden</th>
                     <td colspan="2">Signed by ' . $request->advisor_id . '</td>
                     <td>Date</td>
-                    <td colspan="3">' . $request->a_date . '</td>
+                    <td colspan="3">' . date('d/m/Y', strtotime($request->a_date)) . '</td>
                 </tr>
                 <tr>
                     <th rowspan="2">9</th>
@@ -257,19 +261,19 @@ class request_model extends CI_Model
                     <th>Dated signature of HOD</th>
                     <td colspan="2">Signed by ' . $request->hod_id . '</td>
                     <td>Date</td>
-                    <td colspan="3">' . $request->h_date . '</td>
+                    <td colspan="3">' . date('d/m/Y', strtotime($request->h_date)) . '</td>
                 </tr>
                 <tr>
                     <th colspan="2">Remarks & Dated signature of Principal</th>
                     <td colspan="2">' . $request->p_remarks . '</td>
                     <td colspan="1">Signed by ' . $request->principal_id . '</td>
                     <td>Date</td>
-                    <td colspan="2">' . $request->p_date . '</td>
+                    <td colspan="2">' . date('d/m/Y', strtotime($request->p_date)) . '</td>
                 </tr>
                 <tr>
                     <th colspan="2" rowspan="3">Remarks, Initials & Date</th>
-                    <td colspan="2">Offie section</td>
-                    <td colspan="4">AA</td>
+                    <td colspan="2">Office section</td>
+                    <td colspan="4">' . $request->section . '</td>
                 </tr>
                 <tr>
                     <td colspan="5">' . $request->o_remarks . '<br></td>
@@ -277,9 +281,9 @@ class request_model extends CI_Model
                 </tr>
                 <tr>
                     <td colspan="1">Date of issue</td>
-                    <td colspan="2">' . $request->issue_date . '</td>
+                    <td colspan="2">' . date('d/m/Y', strtotime($request->issue_date)) . '</td>
                     <td colspan="2">Date of Return</td>
-                    <td colspan="2">' . $request->return_date . '</td>
+                    <td colspan="2">' . date('d/m/Y', strtotime($request->return_date)) . '</td>
                 </tr>
             </table></div>';
         return $output;

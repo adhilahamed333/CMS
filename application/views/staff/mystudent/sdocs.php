@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="item-card">
                     <div><?= $mydoc->doc_id; ?></div>
                     <div><?= $mydoc->dtype; ?></div>
-                    <div><a href="<?php echo base_url() . 'index.php/mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>
+                    <div><a href="<?php echo base_url() . 'mydash/viewdoc/' . $mydoc->doc_id; ?>">View</a></div>
                 </div>
         <?php }
         } ?>

@@ -21,7 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                         <div>
                             <?php if ($myrequest->issued == 1 && $myrequest->receipt == 0) {
-                                echo "<div><a class='btn btn-primary' href='" . base_url() . "index.php/student/verify_receipt/" . $myrequest->request_id . "'>Verify Receipt</a></div>";
+                                echo "<div><a class='btn btn-primary' href='" . base_url() . "student/verify_receipt/" . $myrequest->request_id . "'>Verify Receipt</a></div>";
                             }
                             if (($myrequest->submit == 1 && $myrequest->advisor != 1 && $myrequest->advisor != -1)) {
                                 echo form_open_multipart('student/withdraw_remark');

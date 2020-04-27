@@ -3,8 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <div class="login col-sm-10 text-center">
     <div class="dashbox">
-        <h4>My Results</h4>
-        <div style="width:inherit;overflow-y:auto;height:485px;">
+        <h3>My Results</h3>
+
+        <div style="width:inherit;overflow-y:auto;height:469px;">
+            <h4>CGPA:<?= $cgpa ?></h4>
             <?php for ($i = 1; $i <= 8; $i++) {
                 if ($sem['sgpa'][$i] != null) { ?>
                     <div class="item-card">
@@ -38,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <td colspan="2">SGPA</td>
                                 <td colspan="3"><?= $sem['sgpa'][$i] ?></td>
                             </tr>
-                        </table><br>                     
+                        </table><br>
                     </div>
             <?php }
             } ?>
