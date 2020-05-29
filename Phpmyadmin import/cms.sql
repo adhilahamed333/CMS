@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 11:51 AM
+-- Generation Time: May 29, 2020 at 06:16 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `advisor_details` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `staff_id` varchar(255) NOT NULL,
   `branch_in_charge` varchar(255) NOT NULL,
   `sem_in_charge` int(11) NOT NULL
@@ -40,9 +41,9 @@ CREATE TABLE `advisor_details` (
 -- Dumping data for table `advisor_details`
 --
 
-INSERT INTO `advisor_details` (`id`, `username`, `staff_id`, `branch_in_charge`, `sem_in_charge`) VALUES
-(1, 'anju_advisor', 'a_cse_8_b', 'CSE', 8),
-(2, 'deepa_advisor', 'a_cse_8_a', 'CSE', 8);
+INSERT INTO `advisor_details` (`id`, `username`, `name`, `staff_id`, `branch_in_charge`, `sem_in_charge`) VALUES
+(1, 'anju_advisor', 'name', 'a_cse_8_b', 'CSE', 8),
+(2, 'deepa_advisor', 'name', 'a_cse_8_a', 'CSE', 8);
 
 -- --------------------------------------------------------
 
@@ -65,9 +66,10 @@ CREATE TABLE `doc_path` (
 --
 
 INSERT INTO `doc_path` (`doc_id`, `dtype`, `owner`, `path`, `verified`, `remarks`, `upload_time`) VALUES
-(14, 'Income', 6079, 'C:/xampp/htdocs/cms/uploads/income_2018.pdf', 1, 'By anju_advisor', '2020-04-01 14:46:27'),
-(15, 'caste', 6079, 'C:/xampp/htdocs/cms/uploads/caste_2018.pdf', 1, 'By anju_advisor', '2020-04-05 15:22:39'),
-(16, 'nativity', 6079, 'C:/xampp/htdocs/cms/uploads/nativity_2018.pdf', 1, 'By anju_advisor', '2020-04-05 17:44:49');
+(14, 'Income', 6079, 'income_2018.pdf', 1, 'By anju_advisor', '2020-04-01 14:46:27'),
+(15, 'caste', 6079, 'caste_2018.pdf', 1, 'By anju_advisor', '2020-04-05 15:22:39'),
+(16, 'nativity', 6079, 'nativity_2018.pdf', 1, 'By anju_advisor', '2020-04-05 17:44:49'),
+(17, 're', 6079, 'receipt.pdf', 0, '', '2020-05-28 12:50:20');
 
 -- --------------------------------------------------------
 
@@ -111,7 +113,6 @@ CREATE TABLE `flows` (
 
 INSERT INTO `flows` (`id`, `request_id`, `submit`, `submit_date`, `advisor`, `advisor_id`, `a_remarks`, `a_date`, `hod`, `hod_id`, `h_remarks`, `h_date`, `principal`, `principal_id`, `p_remarks`, `p_date`, `office`, `office_id`, `o_remarks`, `o_date`, `issued`, `i_remarks`, `issue_date`, `receipt`, `receipt_date`, `completed`, `c_date`) VALUES
 (71, 84, 1, '2020-04-02 18:58:47', -1, 'anju_advisor', 'fail', '2020-04-02 19:30:05', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
-(74, 87, 1, '2020-04-05 20:21:28', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
 (75, 88, 1, '2020-04-05 20:24:46', 1, 'deepa_advisor', '', '2020-04-05 20:25:29', 1, 'madhu_hod', 'done', '2020-04-14 12:08:11', 1, 'principal', 'done', '2020-04-14 12:08:31', 1, 'office_1', '', '2020-04-14 12:09:25', 1, 'Testimonials to be returned', '2020-04-14 14:41:19', 1, '2020-04-14 14:45:44', 1, '2020-04-14 14:45:44'),
 (76, 89, 1, '2020-04-07 14:05:15', 1, 'anju_advisor', '', '2020-04-14 14:48:27', 1, 'madhu_hod', '', '2020-04-14 14:48:36', 1, 'principal', '', '2020-04-14 14:48:47', 1, 'office_2', '', '2020-04-14 14:49:07', 1, 'Testimonials must be returned', '2020-04-14 14:49:10', 1, '2020-04-14 14:49:25', 1, '2020-04-14 15:04:19');
 
@@ -124,6 +125,7 @@ INSERT INTO `flows` (`id`, `request_id`, `submit`, `submit_date`, `advisor`, `ad
 CREATE TABLE `hod_details` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `staff_id` varchar(255) NOT NULL,
   `branch_in_charge` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -132,8 +134,32 @@ CREATE TABLE `hod_details` (
 -- Dumping data for table `hod_details`
 --
 
-INSERT INTO `hod_details` (`id`, `username`, `staff_id`, `branch_in_charge`) VALUES
-(1, 'madhu_hod', 'h_cse', 'CSE');
+INSERT INTO `hod_details` (`id`, `username`, `name`, `staff_id`, `branch_in_charge`) VALUES
+(1, 'madhu_hod', 'name', 'h_cse', 'CSE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `mid` int(11) NOT NULL,
+  `fromuser` varchar(255) NOT NULL,
+  `touser` varchar(255) NOT NULL,
+  `time` datetime NOT NULL DEFAULT current_timestamp(),
+  `readtime` datetime DEFAULT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`mid`, `fromuser`, `touser`, `time`, `readtime`, `subject`, `message`) VALUES
+(10, 'ABHI01', 'adhil', '2020-05-28 20:06:46', '2020-05-28 20:07:20', 'bj', 'asgjmskgdm;'),
+(11, 'adhil', 'ABHI01', '2020-05-28 20:08:01', '2020-05-28 20:08:19', 'njlnlkKNL', 'KNLKN;K');
 
 -- --------------------------------------------------------
 
@@ -144,6 +170,7 @@ INSERT INTO `hod_details` (`id`, `username`, `staff_id`, `branch_in_charge`) VAL
 CREATE TABLE `office_details` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `staff_id` varchar(255) NOT NULL,
   `section_in_charge` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -152,12 +179,12 @@ CREATE TABLE `office_details` (
 -- Dumping data for table `office_details`
 --
 
-INSERT INTO `office_details` (`id`, `username`, `staff_id`, `section_in_charge`) VALUES
-(1, 'office_1', 'office_a', 'a'),
-(2, 'office_2', 'office_b', 'b'),
-(3, 'office_3', 'office_c', 'c'),
-(4, 'office_4', 'office_d', 'd'),
-(5, 'office_5', 'office_e', 'e');
+INSERT INTO `office_details` (`id`, `username`, `name`, `staff_id`, `section_in_charge`) VALUES
+(1, 'office_1', 'name', 'office_a', 'a'),
+(2, 'office_2', 'name', 'office_b', 'b'),
+(3, 'office_3', 'name', 'office_c', 'c'),
+(4, 'office_4', 'name', 'office_d', 'd'),
+(5, 'office_5', 'name', 'office_e', 'e');
 
 -- --------------------------------------------------------
 
@@ -168,6 +195,7 @@ INSERT INTO `office_details` (`id`, `username`, `staff_id`, `section_in_charge`)
 CREATE TABLE `principal_details` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `staff_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -175,8 +203,8 @@ CREATE TABLE `principal_details` (
 -- Dumping data for table `principal_details`
 --
 
-INSERT INTO `principal_details` (`id`, `username`, `staff_id`) VALUES
-(1, 'principal', 'principal_1');
+INSERT INTO `principal_details` (`id`, `username`, `name`, `staff_id`) VALUES
+(1, 'principal', 'name', 'principal_1');
 
 -- --------------------------------------------------------
 
@@ -202,7 +230,6 @@ CREATE TABLE `requests` (
 
 INSERT INTO `requests` (`request_id`, `type`, `owner`, `reason`, `remarks`, `return_applicable`, `returned`, `r_remarks`, `return_date`) VALUES
 (84, 'Transfer', 6079, 'Scholarship', 'done', 0, 0, '0', NULL),
-(87, 'Recommendation for scholorchip, etc.', 6000, 'af', '', 0, 0, '0', NULL),
 (88, 'Refund of fees', 6079, 'Scholarship', 'hekllo', 1, 0, '0', '0000-00-00 00:00:00'),
 (89, 'Recommendation for scholorchip, etc.', 6079, 'khkuhh', 'chummaa', 1, 1, 'Testimonials returned', '2020-04-14 15:04:19');
 
@@ -3579,7 +3606,8 @@ INSERT INTO `student_academic_entrys` (`id`, `admission_no`, `qualifying_exam`, 
 (51, 6994, 'HSE', '14-16', 'ABC HSS jks', 'sate', 1000, 1200, '542449', NULL),
 (52, 6948, 'HSE', '14-16', 'ABC HSS jks', 'sate', 1000, 1200, '542450', NULL),
 (53, 6545, 'HSE', '14-16', 'ABC HSS jks', 'sate', 1000, 1200, '542451', NULL),
-(54, 6953, 'HSE', '14-16', 'ABC HSS jks', 'sate', 1000, 1200, '542452', NULL);
+(54, 6953, 'HSE', '14-16', 'ABC HSS jks', 'sate', 1000, 1200, '542452', NULL),
+(61, 6000, 'ASGDG', 'sdfgdg', 'sdgdg', 'dgadh', 1200, 1200, 'szgsd', '2020-12-31');
 
 -- --------------------------------------------------------
 
@@ -3656,7 +3684,8 @@ INSERT INTO `student_academic_exits` (`id`, `admission_no`, `cgpa`, `year_of_gra
 (53, 6994, 6.95, NULL, NULL, NULL, NULL, NULL, NULL),
 (54, 6948, 8.13, NULL, NULL, NULL, NULL, NULL, NULL),
 (55, 6545, 8.09, NULL, NULL, NULL, NULL, NULL, NULL),
-(56, 6953, 7.26, NULL, NULL, NULL, NULL, NULL, NULL);
+(56, 6953, 7.26, NULL, NULL, NULL, NULL, NULL, NULL),
+(59, 6000, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3730,7 +3759,8 @@ INSERT INTO `student_admissions` (`id`, `admission_no`, `date_of_admission`, `ad
 (51, 6994, NULL, 63450, 48, 'obc'),
 (52, 6948, NULL, 63451, 49, 'oec'),
 (53, 6545, NULL, 63452, 50, 'muslim'),
-(54, 6953, NULL, 63453, 51, 'general');
+(54, 6953, NULL, 63453, 51, 'general'),
+(64, 6000, '2020-12-31', 0, 123456, 'ST');
 
 -- --------------------------------------------------------
 
@@ -3756,7 +3786,6 @@ CREATE TABLE `student_basics` (
 
 INSERT INTO `student_basics` (`id`, `admission_no`, `course`, `branch`, `semester`, `username`, `date_of_joining`, `date_of_leaving`, `university_reg_no`) VALUES
 (1, 6079, 'B Tech', 'CSE', 8, 'adhil', '2020-06-13', '0000-00-00', 'IDK16CS002'),
-(2, 6000, 'B tech', 'CSE', 6, 'baby', '2020-06-13', '0000-00-00', 'IDK16CS006'),
 (3, 6500, 'B tech', 'IT', 8, 'it', '2020-03-03', '0000-00-00', 'IDK16IT002'),
 (11, 6328, 'Btech', 'CSE', 8, 'ABHI01', '2020-04-18', NULL, 'IDK16CS001'),
 (12, 6323, 'Btech', 'CSE', 8, 'ADHI03', '2020-04-18', NULL, 'IDK16CS003'),
@@ -3809,7 +3838,8 @@ INSERT INTO `student_basics` (`id`, `admission_no`, `course`, `branch`, `semeste
 (59, 6994, 'Btech', 'CSE', 8, 'ANUSH50', '2020-04-18', NULL, 'LIDK16CS065'),
 (60, 6948, 'Btech', 'CSE', 8, 'JISHA51', '2020-04-18', NULL, 'LIDK16CS066'),
 (61, 6545, 'Btech', 'CSE', 8, 'NEHA52', '2020-04-18', NULL, 'LIDK16CS067'),
-(62, 6953, 'Btech', 'CSE', 8, 'ROHIN53', '2020-04-18', NULL, 'LIDK16CS068');
+(62, 6953, 'Btech', 'CSE', 8, 'ROHIN53', '2020-04-18', NULL, 'LIDK16CS068'),
+(76, 6000, 'Btech', 'cse', 8, 'anu', '2016-12-31', NULL, 'idk16cs222');
 
 -- --------------------------------------------------------
 
@@ -3890,7 +3920,8 @@ INSERT INTO `student_familys` (`id`, `admission_no`, `name_of_fm`, `occupation_o
 (52, 6994, 'name', 'business', 'fljfklg', 453250, 'name@gmail.com', 'nameLG', 'father', 'business', 'fljfklg', 453250, 'name@gmail.com'),
 (53, 6948, 'name', 'business', 'ldfjldfj', 453251, 'name@gmail.com', 'nameLG', 'father', 'business', 'ldfjldfj', 453251, 'name@gmail.com'),
 (54, 6545, 'name', 'business', 'slfjwo', 453252, 'name@gmail.com', 'nameLG', 'father', 'business', 'slfjwo', 453252, 'name@gmail.com'),
-(55, 6953, 'name', 'business', 'sldf', 453253, 'name@gmail.com', 'nameLG', 'father', 'business', 'sldf', 453253, 'name@gmail.com');
+(55, 6953, 'name', 'business', 'sldf', 453253, 'name@gmail.com', 'nameLG', 'father', 'business', 'sldf', 453253, 'name@gmail.com'),
+(67, 6000, 'zgds', 'fdgs', 'sg', 1234567890, 'adhilahamed484@gmail.com', '', '', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -3962,7 +3993,8 @@ INSERT INTO `student_hostels` (`id`, `admission_no`, `hostel_name`, `date_of_adm
 (52, 6994, 'lh', NULL),
 (53, 6948, 'lh', NULL),
 (54, 6545, 'lh', NULL),
-(55, 6953, 'lh', NULL);
+(55, 6953, 'lh', NULL),
+(64, 6000, 'LH', '2020-12-31');
 
 -- --------------------------------------------------------
 
@@ -3989,7 +4021,6 @@ CREATE TABLE `student_personals` (
 
 INSERT INTO `student_personals` (`id`, `admission_no`, `name`, `gender`, `dob`, `phone`, `mobile`, `address`, `email`, `category`) VALUES
 (1, 6079, 'Adhil Ahamed A.P', 'male', '1998-12-11', 0, 8593007310, 'Fathima Manzil,\r\nKodampuzha,\r\nP.O Farook College,\r\nCalicut,\r\n673632', 'adhilahamed484@gmail.com', 'OBC'),
-(2, 6000, 'amal baby', 'm', '2020-03-04', 8527419632, 8593007310, 'bhbjb', 'nlkjnj', 'oec'),
 (3, 6500, 'It', 'm', '1998-12-11', 7894561230, 789456123852, 'asfasv', 'sdgsf', 'asfa'),
 (8, 6328, 'ABHINAV KS', 'Male', '2020-04-18', 453251, 8545200011, 'ccff', 'abhi@gmail.com', 'OBC'),
 (9, 6323, 'ADHITHYE T S', 'Male', '2020-04-18', 453253, 8545200013, 'hjsdg', 'adhi@gmail.com', 'OEC'),
@@ -4042,7 +4073,8 @@ INSERT INTO `student_personals` (`id`, `admission_no`, `name`, `gender`, `dob`, 
 (56, 6994, 'ANUSHA RAJ', 'Female', '2020-04-18', 453250, 8545200050, 'fljfklg', 'anusha@gmail.com', 'OEC'),
 (57, 6948, 'JISHA RAJ', 'Female', '2020-04-18', 453251, 8545200051, 'ldfjldfj', 'jisha@gmail.com', 'OBC'),
 (58, 6545, 'NEHA THADEUS', 'Female', '2020-04-18', 453252, 8545200052, 'slfjwo', 'neha@gmail.com', 'OBC'),
-(59, 6953, 'ROHINI V', 'Female', '2020-04-18', 453253, 8545200053, 'sldf', 'rohini@gmail.com', 'OBC');
+(59, 6953, 'ROHINI V', 'Female', '2020-04-18', 453253, 8545200053, 'sldf', 'rohini@gmail.com', 'OBC'),
+(71, 6000, 'anu mol', 'F', '1999-11-30', 7894561230, 1234567890, 'zdvgsdg', 'adhilahamed484@gmail.com', 'ST');
 
 -- --------------------------------------------------------
 
@@ -4211,7 +4243,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (77, 'ANUSH50', 'e10adc3949ba59abbe56e057f20f883e', 'student'),
 (78, 'JISHA51', 'e10adc3949ba59abbe56e057f20f883e', 'student'),
 (79, 'NEHA52', 'e10adc3949ba59abbe56e057f20f883e', 'student'),
-(80, 'ROHIN53', 'e10adc3949ba59abbe56e057f20f883e', 'student');
+(80, 'ROHIN53', 'e10adc3949ba59abbe56e057f20f883e', 'student'),
+(82, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin'),
+(104, 'anu', 'e10adc3949ba59abbe56e057f20f883e', 'student');
 
 --
 -- Indexes for dumped tables
@@ -4246,6 +4280,14 @@ ALTER TABLE `hod_details`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `staff_id` (`staff_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`mid`),
+  ADD KEY `Forign_usernamefrom` (`fromuser`),
+  ADD KEY `Forign_usernameto` (`touser`);
 
 --
 -- Indexes for table `office_details`
@@ -4362,7 +4404,7 @@ ALTER TABLE `advisor_details`
 -- AUTO_INCREMENT for table `doc_path`
 --
 ALTER TABLE `doc_path`
-  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `flows`
@@ -4375,6 +4417,12 @@ ALTER TABLE `flows`
 --
 ALTER TABLE `hod_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `office_details`
@@ -4410,43 +4458,43 @@ ALTER TABLE `results`
 -- AUTO_INCREMENT for table `student_academic_entrys`
 --
 ALTER TABLE `student_academic_entrys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `student_academic_exits`
 --
 ALTER TABLE `student_academic_exits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `student_admissions`
 --
 ALTER TABLE `student_admissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `student_basics`
 --
 ALTER TABLE `student_basics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `student_familys`
 --
 ALTER TABLE `student_familys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `student_hostels`
 --
 ALTER TABLE `student_hostels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `student_personals`
 --
 ALTER TABLE `student_personals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -4458,7 +4506,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Constraints for dumped tables
@@ -4487,6 +4535,13 @@ ALTER TABLE `flows`
 --
 ALTER TABLE `hod_details`
   ADD CONSTRAINT `Forign_username_hod` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `Forign_usernamefrom` FOREIGN KEY (`fromuser`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Forign_usernameto` FOREIGN KEY (`touser`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `office_details`

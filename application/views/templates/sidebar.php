@@ -8,6 +8,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <h4><a href="<?php echo base_url(); ?>mydash/mydoc">My Documents</a></h4>
         <h4><a href="<?php echo base_url(); ?>request">Certification/Service Requests</a></h4>
         <h4><a href="<?php echo base_url() . 'myresult'; ?>">Results</a></h4>
+    <?php } elseif ($_SESSION['role'] == 'admin') {?>
+        <h4><a href="<?php echo base_url() . 'admin/add_user'; ?>">Add New User</a></h4>
     <?php } else { ?>
         <h4><a href="<?php echo base_url() . 'staff/myclass'; ?>">My Class</a></h4>
         <h4><a href="<?php echo base_url() . 'result_upload'; ?>">Upload Results</a></h4>

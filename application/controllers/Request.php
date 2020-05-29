@@ -9,6 +9,8 @@ class Request extends CI_Controller
             $this->load->view('templates/header.php');
             $this->load->view('templates/sidebar.php');
             $content['error_msg'] = "";
+            $this->load->model('student/request_model');
+            $content['types'] = $this->request_model->fetch_types();
             $this->load->view('student/request/request_s1', $content);
             $this->load->view('templates/footer.php');
         } else {
@@ -19,9 +21,7 @@ class Request extends CI_Controller
     public function request_s1()
     {
         if (isset($_SESSION['username'])) {
-            $this->load->view('templates/header.php');
-            $this->load->view('templates/sidebar.php');
-
+            
             $this->load->model('student/request_model');
             $request = $this->input->post('request');
             $request = $this->input->post('other') . $request;
@@ -51,11 +51,11 @@ class Request extends CI_Controller
                     $uploaded = $this->upload->do_upload('userfile');
                 } else {
                     $uploaded = 0;
-                    $content['error_msg'] = $content['error_msg'] . "<br>Document already exists";
+                    $content['error_msg'] = $content['error_msg'] . "&nbsp *Document already exists";
                 }
             } else {
                 $uploaded = 0;
-                $content['error_msg'] = $content['error_msg'] . "<br>Enter document type";
+                $content['error_msg'] = $content['error_msg'] . "&nbsp *Enter document type";
             }
 
 
@@ -73,13 +73,13 @@ class Request extends CI_Controller
                 $this->load->view('student/request/request_s2', $content);
             } else {
                 if (!($u1 && $u2 && $u3 && $u4 && $u5)) {
-                    $content['error_msg'] = $content['error_msg'] . "<br>Check all undertakings";
+                    $content['error_msg'] = $content['error_msg'] . "&nbsp *Check all undertakings";
                 }
                 if (!$request) {
-                    $content['error_msg'] = $content['error_msg'] . "<br>Select a request";
+                    $content['error_msg'] = $content['error_msg'] . "&nbsp *Select a request";
                 }
                 if (!$reason) {
-                    $content['error_msg'] = $content['error_msg'] . "<br>Specify reason";
+                    $content['error_msg'] = $content['error_msg'] . "&nbsp *Specify reason";
                 }
                 if (!$uploaded) {
                     $content['error_msg'] = $content['error_msg'] . $this->upload->display_errors();

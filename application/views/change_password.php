@@ -21,7 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <label for="op">Confirm New Password</label>
             <input type="password" name="cp" placeholder="Confirm New Password" class="form-control">
         </div>
-        <span style="color: red"><?php echo $message_error; ?></span>
+        <span class="red-span"><?php echo $message_error; ?></span>
         <div class="form-group">
             <input type="submit" name="submit" value="Change" class="btn btn-primary">
         </div>

@@ -15,6 +15,15 @@ class request_model extends CI_Model
         return $request_id;
     }
 
+    public function fetch_types()
+    {
+        $this->db->select('type');
+        $this->db->from('request_types');
+        $this->db->order_by('id','ASC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function request_flow($request_id)
     {
         $data = array(
@@ -96,7 +105,7 @@ class request_model extends CI_Model
     public function verify_receipt($request_id, $username)
     {
 
-        $this->db->set('receipt',1);
+        $this->db->set('receipt', 1);
         $this->db->set('receipt_date', 'NOW()', FALSE);
         $this->db->where('request_id', $request_id);
         $this->db->update('flows');

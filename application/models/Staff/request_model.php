@@ -155,14 +155,14 @@ class request_model extends CI_Model
 
         $query = $this->db->get();
         $request = $query->row();
-        $tc_issue_date ="";
-        if (!$request->tc_issue_date == '0000-00-00'&&!$request->tc_issue_date == NULL) {
+        $tc_issue_date = "";
+        if (!$request->tc_issue_date == '0000-00-00' && !$request->tc_issue_date == NULL) {
             $tc_issue_date = date('d/m/Y', strtotime($request->tc_issue_date));
         }
-        $output = '<h2 style="align-items: center">GOVERNMENT ENGINEERING COLLEGE IDUKKI</h2>
-        <h9 style="align-items: center">APPLICATION FOR RECOMMENDATION/ATTESTATION/CERTIFICATES/RETURN OF TESTIMONIALS/REFUND OF FEES</h9>
-        <div>
-            <table border="1">
+        $output = '<style>table,th,td{border:1px solid black;border-spacing: 0;border-collapse: collapse}</style><div style="margin-left:80px;font-size:25px">GOVERNMENT ENGINEERING COLLEGE IDUKKI</div>
+        <div style="margin-left:35px;font-size:12px">APPLICATION FOR RECOMMENDATION/ATTESTATION/CERTIFICATES/RETURN OF TESTIMONIALS/REFUND OF FEES</div>
+        <br><div>
+            <table style="width:98%;text-align:center">
                 <tr>
                     <th colspan="2">Request ID</th>
                     <td colspan="6">' . $request->request_id . '</td>

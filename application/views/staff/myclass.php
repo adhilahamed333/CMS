@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     
     <div class="dashbox">
         <br>
-        <div style="width:inherit;overflow-y:auto;height:100%;">
+        <div style="width:inherit;overflow-y:auto;height:400px;">
             <?php if ($myclass) {
 
                 foreach ($myclass as $myclasses) { ?>

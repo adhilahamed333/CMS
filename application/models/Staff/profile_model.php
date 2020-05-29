@@ -12,6 +12,7 @@ class profile_model extends CI_Model
             'username' => $row->username,
             'staff_id' => $staff_id,
             'branch_in_charge' => $row->branch_in_charge,
+            'name' => $row->name,
             'sem_in_charge' => $row->sem_in_charge
         );
         return $data;
@@ -26,8 +27,8 @@ class profile_model extends CI_Model
         $data = array(
             'username' => $row->username,
             'staff_id' => $staff_id,
-            'branch_in_charge' => $row->branch_in_charge
-
+            'branch_in_charge' => $row->branch_in_charge,
+            'name' => $row->name,
         );
         return $data;
     }
@@ -39,8 +40,8 @@ class profile_model extends CI_Model
         $row = $query->row();
         $data = array(
             'username' => $row->username,
-            'staff_id' => $staff_id
-
+            'staff_id' => $staff_id,
+            'name' => $row->name,
         );
         return $data;
     }
@@ -53,7 +54,8 @@ class profile_model extends CI_Model
         $data = array(
             'username' => $row->username,
             'staff_id' => $staff_id,
-            'section_in_charge' => $row->section_in_charge
+            'section_in_charge' => $row->section_in_charge,
+            'name' => $row->name,
 
         );
         return $data;

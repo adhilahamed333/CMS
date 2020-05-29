@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="form-group">
         <input type="password" name="password" placeholder="Password" class="form-control">
     </div>
-    <span style="color: red"><?php echo $message_error; ?></span>
+    <span class="red-span"><?php echo $message_error; ?></span>
     <div class="form-group">
         <input type="submit" name="submit" value="Login" class="btn btn-primary">
     </div>

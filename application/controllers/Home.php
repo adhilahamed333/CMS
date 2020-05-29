@@ -4,6 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Home extends CI_Controller
 {
 
+    public function index()
+    {
+        if (isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
+        
+        $this->load->view('templates/header.php');
+        $this->load->view('home.php',);
+        $this->load->view('templates/footer.php');
+    }
 
     public function login()
     {
@@ -24,6 +34,11 @@ class Home extends CI_Controller
                 $this->load->view('templates/header.php');
                 $this->load->view('templates/sidebar.php');
                 $this->load->view('student/dash');
+                $this->load->view('templates/footer.php');
+            } elseif ($_SESSION['role'] == 'admin') {
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('admin/dash');
                 $this->load->view('templates/footer.php');
             } else {
                 $this->load->view('templates/header.php');
@@ -52,6 +67,7 @@ class Home extends CI_Controller
         if ($is_valid) {
             $role = $this->users_model->fetch_role($username);
             if ($role == 'student') {
+                $username = $this->users_model->fetch_username($username);
                 $admno = $this->users_model->fetch_admno($username);
                 $semester = $this->users_model->fetch_sem($username);
 
@@ -100,6 +116,12 @@ class Home extends CI_Controller
                     'role' => $role,
                     'staff_id' => $staff_details->staff_id,
                     'section_in_charge' => $staff_details->section_in_charge,
+                    'is_logged_in' => true
+                );
+            } elseif ($role == 'admin') {
+                $data = array(
+                    'username' => $username,
+                    'role' => $role,
                     'is_logged_in' => true
                 );
             }
@@ -166,7 +188,7 @@ class Home extends CI_Controller
                 if ($np == $cp && $np != '' && $cp != '') {
                     $np = md5($np);
                     $this->users_model->update_password($username, $np);
-                    redirect('home/dash');  
+                    redirect('home/dash');
                 } else {
                     $data['message_error'] = 'Passwords Donot Match';
                     $this->load->view('templates/header.php');

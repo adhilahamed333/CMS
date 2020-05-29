@@ -3,10 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class mydash extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('mydash_model');
+        $this->load->model('student/request_model');
+    }
+
     function index()
     {
         if (isset($_SESSION['username'])) {
-            $this->load->model('mydash_model');
+
             $query = $this->mydash_model->getMyRequests();
             $data['myrequests'] = null;
             if ($query) {
@@ -34,7 +41,7 @@ class mydash extends CI_Controller
     public function mydoc()
     {
         if (isset($_SESSION['username'])) {
-            $this->load->model('mydash_model');
+
             $query = $this->mydash_model->getDocs();
             $data['mydocs'] = null;
             if ($query) {
@@ -51,23 +58,36 @@ class mydash extends CI_Controller
         }
     }
 
-    public function viewdoc($id)
+    public function downloaddoc($id)
     {
         if (!isset($_SESSION['username'])) {
             redirect('home/dash');
         }
         $this->load->helper('download');
-        $this->load->model('mydash_model');
+
         $query = $this->mydash_model->getpath($id);
         $path = $query->path;
         force_download($path, NULL);
     }
+
+    public function viewdoc($id)
+    {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
+        $query = $this->mydash_model->getpath($id);
+        $content['path'] = $query->path;
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/sidebar.php');
+        $this->load->view('pdf.php',$content);
+        $this->load->view('templates/footer.php');
+    }
+
     public function upload_doc()
     {
         if (isset($_SESSION['username'])) {
 
-            $this->load->model('mydash_model');
-            $this->load->model('student/request_model');
+
 
             $data['error_msg'] = "";
             $data['doc_id'] = "";
@@ -94,7 +114,7 @@ class mydash extends CI_Controller
             }
             if ($uploaded) {
                 $data['data'] = $this->upload->data();
-                $dpath = $this->upload->data('full_path');
+                $dpath = $this->upload->data('file_name');
                 $data['doc_id'] = "Document uploaded and subjected for verificatin with ID:" . $this->request_model->doc_upload($_SESSION['admission_no'], $dtype, $dpath);
                 $query = $this->mydash_model->getDocs();
                 $data['mydocs'] = null;

@@ -10,6 +10,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <?php
             echo $sdetails['username'];
             ?><br>
+            <h9>Name:</h9>
+            <?php
+            echo $sdetails['name'];
+            ?><br>
             <h9>Staff ID:</h9>
             <?php
             echo $sdetails['staff_id'];
