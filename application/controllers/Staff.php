@@ -145,7 +145,7 @@ class Staff extends CI_Controller
     {
         if (isset($_SESSION['username'])) {
             if ($_SESSION['role'] == 'advisor') {
-                $content['myclass'] = $this->myclass_model->fetch_a_class($_SESSION['branch_in_charge'], $_SESSION['sem_in_charge']);
+                $content['myclass'] = $this->myclass_model->fetch_a_class($_SESSION['branch_in_charge'], $_SESSION['batch_in_charge']);
             } else if ($_SESSION['role'] == 'hod') {
                 $content['myclass'] = $this->myclass_model->fetch_h_class($_SESSION['branch_in_charge']);
             } else if ($_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
@@ -154,6 +154,25 @@ class Staff extends CI_Controller
             $this->load->view('templates/header.php');
             $this->load->view('templates/sidebar.php');
             $this->load->view('staff/myclass', $content);
+            $this->load->view('templates/footer.php');
+        } else {
+            redirect('home/login');
+        }
+    }
+
+    public function results()
+    {
+        if (isset($_SESSION['username'])) {
+            if ($_SESSION['role'] == 'advisor') {
+                $content['myclass'] = $this->myclass_model->fetch_a_class($_SESSION['branch_in_charge'], $_SESSION['batch_in_charge']);
+            } else if ($_SESSION['role'] == 'hod') {
+                $content['myclass'] = $this->myclass_model->fetch_h_class($_SESSION['branch_in_charge']);
+            } else if ($_SESSION['role'] == 'principal' || $_SESSION['role'] == 'office') {
+                $content['myclass'] = $this->myclass_model->fetch_po_class();
+            }
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('staff/results.php', $content);
             $this->load->view('templates/footer.php');
         } else {
             redirect('home/login');

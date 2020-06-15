@@ -40,6 +40,58 @@ class result_model extends CI_Model
         }
     }
 
+    public function fetch_regs($semester)
+    {
+        $this->db->select('DISTINCT(results.university_reg_no)');
+        $this->db->select('student_basics.admission_no');
+        $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        $this->db->where('subjects.semester', $semester);
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $this->db->join('subjects', 'results.course_code=subjects.course_code');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+    public function fetch_result($semester)
+    {
+        $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        $this->db->where('subjects.semester', $semester);
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $this->db->join('student_personals', 'student_personals.admission_no=student_basics.admission_no');
+        $this->db->join('subjects', 'results.course_code=subjects.course_code');
+        $this->db->order_by('student_basics.university_reg_no', 'ASC');
+        $this->db->order_by('subjects.slot', 'ASC');
+        $this->db->order_by('subjects.course_code', 'DESC');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+    public function fetch_no_subjects($semester)
+    {
+        $this->db->select('COUNT(DISTINCT(course_code)) as c');
+        $this->db->where('semester', $semester);
+        $this->db->from('subjects');
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row->c;
+    }
+
+    public function fetch_subjects($semester)
+    {
+
+        $this->db->select('DISTINCT(course_code)');
+        $this->db->where('semester', $semester);
+        $this->db->from('subjects');
+        $this->db->order_by('slot', 'ASC');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
     public function fetch_myresults($admission_no)
     {
         $this->db->where('admission_no', $admission_no);
@@ -48,6 +100,7 @@ class result_model extends CI_Model
         $this->db->join('subjects', 'results.course_code=subjects.course_code');
         $this->db->order_by('subjects.semester', 'ASC');
         $this->db->order_by('subjects.slot', 'ASC');
+        $this->db->order_by('subjects.course_code', 'DESC');
         $query = $this->db->get();
         $result = $query->result();
         return $result;

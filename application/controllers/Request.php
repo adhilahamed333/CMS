@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Request extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('student/request_model');
+    }
+
     public function index()
     {
         if (isset($_SESSION['username'])) {
@@ -21,8 +27,9 @@ class Request extends CI_Controller
     public function request_s1()
     {
         if (isset($_SESSION['username'])) {
-            
-            $this->load->model('student/request_model');
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+
             $request = $this->input->post('request');
             $request = $this->input->post('other') . $request;
             $reason = $this->input->post('reason');

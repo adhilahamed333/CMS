@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2020 at 06:16 AM
+-- Generation Time: Jun 15, 2020 at 01:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -34,16 +34,16 @@ CREATE TABLE `advisor_details` (
   `name` varchar(255) NOT NULL,
   `staff_id` varchar(255) NOT NULL,
   `branch_in_charge` varchar(255) NOT NULL,
-  `sem_in_charge` int(11) NOT NULL
+  `batch_in_charge` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `advisor_details`
 --
 
-INSERT INTO `advisor_details` (`id`, `username`, `name`, `staff_id`, `branch_in_charge`, `sem_in_charge`) VALUES
-(1, 'anju_advisor', 'name', 'a_cse_8_b', 'CSE', 8),
-(2, 'deepa_advisor', 'name', 'a_cse_8_a', 'CSE', 8);
+INSERT INTO `advisor_details` (`id`, `username`, `name`, `staff_id`, `branch_in_charge`, `batch_in_charge`) VALUES
+(1, 'anju_advisor', 'name', 'a_cse_8_b', 'CSE', '16-20'),
+(2, 'deepa_advisor', 'name', 'a_cse_8_a', 'CSE', '16-20');
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,9 @@ CREATE TABLE `flows` (
 INSERT INTO `flows` (`id`, `request_id`, `submit`, `submit_date`, `advisor`, `advisor_id`, `a_remarks`, `a_date`, `hod`, `hod_id`, `h_remarks`, `h_date`, `principal`, `principal_id`, `p_remarks`, `p_date`, `office`, `office_id`, `o_remarks`, `o_date`, `issued`, `i_remarks`, `issue_date`, `receipt`, `receipt_date`, `completed`, `c_date`) VALUES
 (71, 84, 1, '2020-04-02 18:58:47', -1, 'anju_advisor', 'fail', '2020-04-02 19:30:05', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
 (75, 88, 1, '2020-04-05 20:24:46', 1, 'deepa_advisor', '', '2020-04-05 20:25:29', 1, 'madhu_hod', 'done', '2020-04-14 12:08:11', 1, 'principal', 'done', '2020-04-14 12:08:31', 1, 'office_1', '', '2020-04-14 12:09:25', 1, 'Testimonials to be returned', '2020-04-14 14:41:19', 1, '2020-04-14 14:45:44', 1, '2020-04-14 14:45:44'),
-(76, 89, 1, '2020-04-07 14:05:15', 1, 'anju_advisor', '', '2020-04-14 14:48:27', 1, 'madhu_hod', '', '2020-04-14 14:48:36', 1, 'principal', '', '2020-04-14 14:48:47', 1, 'office_2', '', '2020-04-14 14:49:07', 1, 'Testimonials must be returned', '2020-04-14 14:49:10', 1, '2020-04-14 14:49:25', 1, '2020-04-14 15:04:19');
+(76, 89, 1, '2020-04-07 14:05:15', 1, 'anju_advisor', '', '2020-04-14 14:48:27', 1, 'madhu_hod', '', '2020-04-14 14:48:36', 1, 'principal', '', '2020-04-14 14:48:47', 1, 'office_2', '', '2020-04-14 14:49:07', 1, 'Testimonials must be returned', '2020-04-14 14:49:10', 1, '2020-04-14 14:49:25', 1, '2020-04-14 15:04:19'),
+(77, 90, 1, '2020-06-15 11:33:22', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
+(78, 91, 1, '2020-06-15 11:35:08', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +233,9 @@ CREATE TABLE `requests` (
 INSERT INTO `requests` (`request_id`, `type`, `owner`, `reason`, `remarks`, `return_applicable`, `returned`, `r_remarks`, `return_date`) VALUES
 (84, 'Transfer', 6079, 'Scholarship', 'done', 0, 0, '0', NULL),
 (88, 'Refund of fees', 6079, 'Scholarship', 'hekllo', 1, 0, '0', '0000-00-00 00:00:00'),
-(89, 'Recommendation for scholorchip, etc.', 6079, 'khkuhh', 'chummaa', 1, 1, 'Testimonials returned', '2020-04-14 15:04:19');
+(89, 'Recommendation for scholorchip, etc.', 6079, 'khkuhh', 'chummaa', 1, 1, 'Testimonials returned', '2020-04-14 15:04:19'),
+(90, 'Bona fide studentship', 6079, 'Scholarship', 'none', 0, 0, '', NULL),
+(91, 'Bona fide studentship', 6079, 'Scholarship', 'none', 0, 0, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -3775,6 +3779,7 @@ CREATE TABLE `student_basics` (
   `branch` varchar(255) NOT NULL,
   `semester` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
+  `batch` varchar(10) DEFAULT NULL,
   `date_of_joining` date DEFAULT current_timestamp(),
   `date_of_leaving` date DEFAULT NULL,
   `university_reg_no` varchar(45) NOT NULL
@@ -3784,62 +3789,62 @@ CREATE TABLE `student_basics` (
 -- Dumping data for table `student_basics`
 --
 
-INSERT INTO `student_basics` (`id`, `admission_no`, `course`, `branch`, `semester`, `username`, `date_of_joining`, `date_of_leaving`, `university_reg_no`) VALUES
-(1, 6079, 'B Tech', 'CSE', 8, 'adhil', '2020-06-13', '0000-00-00', 'IDK16CS002'),
-(3, 6500, 'B tech', 'IT', 8, 'it', '2020-03-03', '0000-00-00', 'IDK16IT002'),
-(11, 6328, 'Btech', 'CSE', 8, 'ABHI01', '2020-04-18', NULL, 'IDK16CS001'),
-(12, 6323, 'Btech', 'CSE', 8, 'ADHI03', '2020-04-18', NULL, 'IDK16CS003'),
-(13, 6099, 'Btech', 'CSE', 8, 'AGHI04', '2020-04-18', NULL, 'IDK16CS004'),
-(14, 6344, 'Btech', 'CSE', 8, 'ALFATHI05', '2020-04-18', NULL, 'IDK16CS009'),
-(15, 6245, 'Btech', 'CSE', 8, 'AMAL06', '2020-04-18', NULL, 'IDK16CS010'),
-(16, 6248, 'Btech', 'CSE', 8, 'AMMAR07', '2020-04-18', NULL, 'IDK16CS011'),
-(17, 6095, 'Btech', 'CSE', 8, 'AMRUTHA08', '2020-04-18', NULL, 'IDK16CS012'),
-(18, 6306, 'Btech', 'CSE', 8, 'ANANDU09', '2020-04-18', NULL, 'IDK16CS013'),
-(19, 6381, 'Btech', 'CSE', 8, 'ANEETA10', '2020-04-18', NULL, 'IDK16CS015'),
-(20, 6392, 'Btech', 'CSE', 8, 'ANJAN11', '2020-04-18', NULL, 'IDK16CS016'),
-(21, 6276, 'Btech', 'CSE', 8, 'ANUMOL12', '2020-04-18', NULL, 'IDK16CS019'),
-(22, 6280, 'Btech', 'CSE', 8, 'ARYA13', '2020-04-18', NULL, 'IDK16CS022'),
-(23, 6124, 'Btech', 'CSE', 8, 'ASWAT14', '2020-04-18', NULL, 'IDK16CS023'),
-(24, 6174, 'Btech', 'CSE', 8, 'ATHUL15', '2020-04-18', NULL, 'IDK16CS024'),
-(25, 6337, 'Btech', 'CSE', 8, 'ATHULYA16', '2020-04-18', NULL, 'IDK16CS025'),
-(26, 6507, 'Btech', 'CSE', 8, 'DONA17', '2020-04-18', NULL, 'IDK16CS027'),
-(27, 6083, 'Btech', 'CSE', 8, 'HAMITH18', '2020-04-18', NULL, 'IDK16CS028'),
-(28, 6192, 'Btech', 'CSE', 8, 'HARI19', '2020-04-18', NULL, 'IDK16CS029'),
-(29, 6420, 'Btech', 'CSE', 8, 'JAMSHI20', '2020-04-18', NULL, 'IDK16CS030'),
-(30, 6351, 'Btech', 'CSE', 8, 'JESNA21', '2020-04-18', NULL, 'IDK16CS031'),
-(31, 6191, 'Btech', 'CSE', 8, 'JESWIN22', '2020-04-18', NULL, 'IDK16CS032'),
-(32, 6180, 'Btech', 'CSE', 8, 'JOSEP23', '2020-04-18', NULL, 'IDK16CS033'),
-(33, 6210, 'Btech', 'CSE', 8, 'JOSEY24', '2020-04-18', NULL, 'IDK16CS034'),
-(34, 6204, 'Btech', 'CSE', 8, 'KANCHA25', '2020-04-18', NULL, 'IDK16CS035'),
-(35, 6195, 'Btech', 'CSE', 8, 'KRISHNA26', '2020-04-18', NULL, 'IDK16CS036'),
-(36, 6391, 'Btech', 'CSE', 8, 'LAKSHMI27', '2020-04-18', NULL, 'IDK16CS037'),
-(37, 6113, 'Btech', 'CSE', 8, 'MEENA28', '2020-04-18', NULL, 'IDK16CS039'),
-(38, 6358, 'Btech', 'CSE', 8, 'MOHAMMED29', '2020-04-18', NULL, 'IDK16CS040'),
-(39, 6154, 'Btech', 'CSE', 8, 'NANDU30', '2020-04-18', NULL, 'IDK16CS041'),
-(40, 6457, 'Btech', 'CSE', 8, 'NIDHI31', '2020-04-18', NULL, 'IDK16CS042'),
-(41, 6371, 'Btech', 'CSE', 8, 'RAJA32', '2020-04-18', NULL, 'IDK16CS044'),
-(42, 6320, 'Btech', 'CSE', 8, 'RAWOOF33', '2020-04-18', NULL, 'IDK16CS045'),
-(43, 6179, 'Btech', 'CSE', 8, 'REME34', '2020-04-18', NULL, 'IDK16CS046'),
-(44, 6267, 'Btech', 'CSE', 8, 'ROHIT35', '2020-04-18', NULL, 'IDK16CS048'),
-(45, 6127, 'Btech', 'CSE', 8, 'RONI36', '2020-04-18', NULL, 'IDK16CS049'),
-(46, 6460, 'Btech', 'CSE', 8, 'SAJID37', '2020-04-18', NULL, 'IDK16CS050'),
-(47, 6141, 'Btech', 'CSE', 8, 'SANDR38', '2020-04-18', NULL, 'IDK16CS051'),
-(48, 6342, 'Btech', 'CSE', 8, 'SANDR39', '2020-04-18', NULL, 'IDK16CS052'),
-(49, 6225, 'Btech', 'CSE', 8, 'SINEES40', '2020-04-18', NULL, 'IDK16CS053'),
-(50, 6170, 'Btech', 'CSE', 8, 'SNEHA41', '2020-04-18', NULL, 'IDK16CS054'),
-(51, 6176, 'Btech', 'CSE', 8, 'SONIA42', '2020-04-18', NULL, 'IDK16CS055'),
-(52, 6508, 'Btech', 'CSE', 8, 'SWATH43', '2020-04-18', NULL, 'IDK16CS056'),
-(53, 6495, 'Btech', 'CSE', 8, 'SYAMKUM44', '2020-04-18', NULL, 'IDK16CS058'),
-(54, 6467, 'Btech', 'CSE', 8, 'VISHNU45', '2020-04-18', NULL, 'IDK16CS061'),
-(55, 6394, 'Btech', 'CSE', 8, 'VISHNU46', '2020-04-18', NULL, 'IDK16CS062'),
-(56, 6449, 'Btech', 'CSE', 8, 'RAHU47', '2020-04-18', NULL, 'IDK16IT042'),
-(57, 6546, 'Btech', 'CSE', 8, 'AJESH48', '2020-04-18', NULL, 'LIDK16CS063'),
-(58, 6555, 'Btech', 'CSE', 8, 'ANJALI49', '2020-04-18', NULL, 'LIDK16CS064'),
-(59, 6994, 'Btech', 'CSE', 8, 'ANUSH50', '2020-04-18', NULL, 'LIDK16CS065'),
-(60, 6948, 'Btech', 'CSE', 8, 'JISHA51', '2020-04-18', NULL, 'LIDK16CS066'),
-(61, 6545, 'Btech', 'CSE', 8, 'NEHA52', '2020-04-18', NULL, 'LIDK16CS067'),
-(62, 6953, 'Btech', 'CSE', 8, 'ROHIN53', '2020-04-18', NULL, 'LIDK16CS068'),
-(76, 6000, 'Btech', 'cse', 8, 'anu', '2016-12-31', NULL, 'idk16cs222');
+INSERT INTO `student_basics` (`id`, `admission_no`, `course`, `branch`, `semester`, `username`, `batch`, `date_of_joining`, `date_of_leaving`, `university_reg_no`) VALUES
+(1, 6079, 'B Tech', 'CSE', 8, 'adhil', '16-20', '2020-06-13', '0000-00-00', 'IDK16CS002'),
+(3, 6500, 'B tech', 'IT', 8, 'it', '16-20', '2020-03-03', '0000-00-00', 'IDK16IT002'),
+(11, 6328, 'Btech', 'CSE', 8, 'ABHI01', '16-20', '2020-04-18', NULL, 'IDK16CS001'),
+(12, 6323, 'Btech', 'CSE', 8, 'ADHI03', '16-20', '2020-04-18', NULL, 'IDK16CS003'),
+(13, 6099, 'Btech', 'CSE', 8, 'AGHI04', '16-20', '2020-04-18', NULL, 'IDK16CS004'),
+(14, 6344, 'Btech', 'CSE', 8, 'ALFATHI05', '16-20', '2020-04-18', NULL, 'IDK16CS009'),
+(15, 6245, 'Btech', 'CSE', 8, 'AMAL06', '16-20', '2020-04-18', NULL, 'IDK16CS010'),
+(16, 6248, 'Btech', 'CSE', 8, 'AMMAR07', '16-20', '2020-04-18', NULL, 'IDK16CS011'),
+(17, 6095, 'Btech', 'CSE', 8, 'AMRUTHA08', '16-20', '2020-04-18', NULL, 'IDK16CS012'),
+(18, 6306, 'Btech', 'CSE', 8, 'ANANDU09', '16-20', '2020-04-18', NULL, 'IDK16CS013'),
+(19, 6381, 'Btech', 'CSE', 8, 'ANEETA10', '16-20', '2020-04-18', NULL, 'IDK16CS015'),
+(20, 6392, 'Btech', 'CSE', 8, 'ANJAN11', '16-20', '2020-04-18', NULL, 'IDK16CS016'),
+(21, 6276, 'Btech', 'CSE', 8, 'ANUMOL12', '16-20', '2020-04-18', NULL, 'IDK16CS019'),
+(22, 6280, 'Btech', 'CSE', 8, 'ARYA13', '16-20', '2020-04-18', NULL, 'IDK16CS022'),
+(23, 6124, 'Btech', 'CSE', 8, 'ASWAT14', '16-20', '2020-04-18', NULL, 'IDK16CS023'),
+(24, 6174, 'Btech', 'CSE', 8, 'ATHUL15', '16-20', '2020-04-18', NULL, 'IDK16CS024'),
+(25, 6337, 'Btech', 'CSE', 8, 'ATHULYA16', '16-20', '2020-04-18', NULL, 'IDK16CS025'),
+(26, 6507, 'Btech', 'CSE', 8, 'DONA17', '16-20', '2020-04-18', NULL, 'IDK16CS027'),
+(27, 6083, 'Btech', 'CSE', 8, 'HAMITH18', '16-20', '2020-04-18', NULL, 'IDK16CS028'),
+(28, 6192, 'Btech', 'CSE', 8, 'HARI19', '16-20', '2020-04-18', NULL, 'IDK16CS029'),
+(29, 6420, 'Btech', 'CSE', 8, 'JAMSHI20', '16-20', '2020-04-18', NULL, 'IDK16CS030'),
+(30, 6351, 'Btech', 'CSE', 8, 'JESNA21', '16-20', '2020-04-18', NULL, 'IDK16CS031'),
+(31, 6191, 'Btech', 'CSE', 8, 'JESWIN22', '16-20', '2020-04-18', NULL, 'IDK16CS032'),
+(32, 6180, 'Btech', 'CSE', 8, 'JOSEP23', '16-20', '2020-04-18', NULL, 'IDK16CS033'),
+(33, 6210, 'Btech', 'CSE', 8, 'JOSEY24', '16-20', '2020-04-18', NULL, 'IDK16CS034'),
+(34, 6204, 'Btech', 'CSE', 8, 'KANCHA25', '16-20', '2020-04-18', NULL, 'IDK16CS035'),
+(35, 6195, 'Btech', 'CSE', 8, 'KRISHNA26', '16-20', '2020-04-18', NULL, 'IDK16CS036'),
+(36, 6391, 'Btech', 'CSE', 8, 'LAKSHMI27', '16-20', '2020-04-18', NULL, 'IDK16CS037'),
+(37, 6113, 'Btech', 'CSE', 8, 'MEENA28', '16-20', '2020-04-18', NULL, 'IDK16CS039'),
+(38, 6358, 'Btech', 'CSE', 8, 'MOHAMMED29', '16-20', '2020-04-18', NULL, 'IDK16CS040'),
+(39, 6154, 'Btech', 'CSE', 8, 'NANDU30', '16-20', '2020-04-18', NULL, 'IDK16CS041'),
+(40, 6457, 'Btech', 'CSE', 8, 'NIDHI31', '16-20', '2020-04-18', NULL, 'IDK16CS042'),
+(41, 6371, 'Btech', 'CSE', 8, 'RAJA32', '16-20', '2020-04-18', NULL, 'IDK16CS044'),
+(42, 6320, 'Btech', 'CSE', 8, 'RAWOOF33', '16-20', '2020-04-18', NULL, 'IDK16CS045'),
+(43, 6179, 'Btech', 'CSE', 8, 'REME34', '16-20', '2020-04-18', NULL, 'IDK16CS046'),
+(44, 6267, 'Btech', 'CSE', 8, 'ROHIT35', '16-20', '2020-04-18', NULL, 'IDK16CS048'),
+(45, 6127, 'Btech', 'CSE', 8, 'RONI36', '16-20', '2020-04-18', NULL, 'IDK16CS049'),
+(46, 6460, 'Btech', 'CSE', 8, 'SAJID37', '16-20', '2020-04-18', NULL, 'IDK16CS050'),
+(47, 6141, 'Btech', 'CSE', 8, 'SANDR38', '16-20', '2020-04-18', NULL, 'IDK16CS051'),
+(48, 6342, 'Btech', 'CSE', 8, 'SANDR39', '16-20', '2020-04-18', NULL, 'IDK16CS052'),
+(49, 6225, 'Btech', 'CSE', 8, 'SINEES40', '16-20', '2020-04-18', NULL, 'IDK16CS053'),
+(50, 6170, 'Btech', 'CSE', 8, 'SNEHA41', '16-20', '2020-04-18', NULL, 'IDK16CS054'),
+(51, 6176, 'Btech', 'CSE', 8, 'SONIA42', '16-20', '2020-04-18', NULL, 'IDK16CS055'),
+(52, 6508, 'Btech', 'CSE', 8, 'SWATH43', '16-20', '2020-04-18', NULL, 'IDK16CS056'),
+(53, 6495, 'Btech', 'CSE', 8, 'SYAMKUM44', '16-20', '2020-04-18', NULL, 'IDK16CS058'),
+(54, 6467, 'Btech', 'CSE', 8, 'VISHNU45', '16-20', '2020-04-18', NULL, 'IDK16CS061'),
+(55, 6394, 'Btech', 'CSE', 8, 'VISHNU46', '16-20', '2020-04-18', NULL, 'IDK16CS062'),
+(56, 6449, 'Btech', 'CSE', 8, 'RAHU47', '16-20', '2020-04-18', NULL, 'IDK16IT042'),
+(57, 6546, 'Btech', 'CSE', 8, 'AJESH48', '16-20', '2020-04-18', NULL, 'LIDK16CS063'),
+(58, 6555, 'Btech', 'CSE', 8, 'ANJALI49', '16-20', '2020-04-18', NULL, 'LIDK16CS064'),
+(59, 6994, 'Btech', 'CSE', 8, 'ANUSH50', '16-20', '2020-04-18', NULL, 'LIDK16CS065'),
+(60, 6948, 'Btech', 'CSE', 8, 'JISHA51', '16-20', '2020-04-18', NULL, 'LIDK16CS066'),
+(61, 6545, 'Btech', 'CSE', 8, 'NEHA52', '16-20', '2020-04-18', NULL, 'LIDK16CS067'),
+(62, 6953, 'Btech', 'CSE', 8, 'ROHIN53', '16-20', '2020-04-18', NULL, 'LIDK16CS068'),
+(76, 6000, 'Btech', 'cse', 8, 'anu', '16-20', '2016-12-31', NULL, 'idk16cs222');
 
 -- --------------------------------------------------------
 
@@ -4160,7 +4165,9 @@ INSERT INTO `subjects` (`id`, `course_code`, `course_name`, `semester`, `credits
 (85, 'CS404 ', 'Embedded Systems', 8, 3, 'B'),
 (86, 'CS468 ', 'Cloud Computing ', 8, 3, 'C'),
 (87, 'ME482', 'Energy Conservation and Management', 8, 3, 'D'),
-(88, 'CS492 ', 'Project', 8, 6, 'S');
+(88, 'CS492 ', 'Project', 8, 6, 'S'),
+(89, 'CS463', 'Cloud Computing', 7, 3, 'F'),
+(90, 'CS364', 'Mobile Computing', 6, 3, 'F');
 
 -- --------------------------------------------------------
 
@@ -4410,7 +4417,7 @@ ALTER TABLE `doc_path`
 -- AUTO_INCREMENT for table `flows`
 --
 ALTER TABLE `flows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `hod_details`
@@ -4440,7 +4447,7 @@ ALTER TABLE `principal_details`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `request_types`
@@ -4500,7 +4507,7 @@ ALTER TABLE `student_personals`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `users`

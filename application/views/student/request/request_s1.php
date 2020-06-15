@@ -19,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </select><br>
         </div>
         <div class="form-group">
-            <label for="other">Specify:</label>
+            <label for="other">Specify(if other):</label>
             <input type="text" name="other" placeholder="Specify"><br>
         </div>
         <div class="form-group">

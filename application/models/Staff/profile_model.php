@@ -13,7 +13,7 @@ class profile_model extends CI_Model
             'staff_id' => $staff_id,
             'branch_in_charge' => $row->branch_in_charge,
             'name' => $row->name,
-            'sem_in_charge' => $row->sem_in_charge
+            'batch_in_charge' => $row->batch_in_charge
         );
         return $data;
     }

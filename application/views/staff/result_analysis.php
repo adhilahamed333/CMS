@@ -20,12 +20,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <tr>
                         <td><?= $results[$reg]->university_reg_no ?>-<?= $result->name ?></td>
                     <?php } ?>
-                    <td><?= $result->grade ?>
-                        <?php if ($i % $c == $c-1) { ?>
+                    <td><?= $result->grade ?></td>
+                        <?php if ($i % $c == $c - 1) { ?>
                     </tr><?php }
                         $i++;
                     } ?>
-
         <?php } ?>
 
     </table>

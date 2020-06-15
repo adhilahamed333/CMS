@@ -11,7 +11,7 @@ class mydash_model extends CI_Model
         }
         if ($_SESSION['role'] == 'advisor') {
             $this->db->where('student_basics.branch="' . $_SESSION['branch_in_charge'] . '"');
-            $this->db->where('student_basics.semester=' . $_SESSION['sem_in_charge']);
+            $this->db->where('student_basics.batch="' . $_SESSION['batch_in_charge'] . '"');
             $this->db->where('flows.submit!=-1');
         }
         if ($_SESSION['role'] == 'hod') {
@@ -41,7 +41,7 @@ class mydash_model extends CI_Model
         $this->db->select("*");
         if (!$_SESSION['role'] == 'student') {
             $this->db->where('student_basics.branch="' . $_SESSION['branch_in_charge'] . '"');
-            $this->db->where('student_basics.semester=' . $_SESSION['sem_in_charge']);
+            $this->db->where('student_basics.semester=' . $_SESSION['batch_in_charge']);
         }
         $this->db->where('verified=0');
         $this->db->from('doc_path');

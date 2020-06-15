@@ -3,17 +3,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 <div class="login col-sm-10 text-left">
-    <h1>My Class<?php if ($_SESSION['role'] == 'advisor') {
-                    echo '(' . $_SESSION['branch_in_charge'] . ', S' . $_SESSION['sem_in_charge'] . ')';
-                } else if ($_SESSION['role'] == 'hod') {
-                    echo '(' . $_SESSION['branch_in_charge'] . ')';
-                }
-                ?></h1>
-    <h3><a href="<?php echo base_url(); ?>result_upload">Upload Result</a></h3>
-    
+    <h1>My Class
+        <?php if ($_SESSION['role'] == 'advisor') {
+            echo '(' . $_SESSION['branch_in_charge'] . ', Batch of ' . $_SESSION['batch_in_charge'] . ')';
+        } else if ($_SESSION['role'] == 'hod') {
+            echo '(' . $_SESSION['branch_in_charge'] . ')';
+        }
+        ?>
+    </h1>
+
+
     <div class="dashbox">
-        <br>
-        <div style="width:inherit;overflow-y:auto;height:400px;">
+        <div style="width:inherit;overflow-y:auto;height:440px;">
             <?php if ($myclass) {
 
                 foreach ($myclass as $myclasses) { ?>

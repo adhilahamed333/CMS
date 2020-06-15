@@ -86,7 +86,7 @@ class Home extends CI_Controller
                     'role' => $role,
                     'staff_id' => $staff_details->staff_id,
                     'branch_in_charge' => $staff_details->branch_in_charge,
-                    'sem_in_charge' => $staff_details->sem_in_charge,
+                    'batch_in_charge' => $staff_details->batch_in_charge,
                     'is_logged_in' => true
                 );
             } elseif ($role == 'hod') {

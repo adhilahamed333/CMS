@@ -25,9 +25,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
             }
             if ($_SESSION['role'] == 'advisor') {
             ?><br>
-                <h9>Semester in Charge:</h9>
+                <h9>Batch in Charge:</h9>
             <?php
-                echo $sdetails['sem_in_charge'];
+                echo $sdetails['batch_in_charge'];
             }
             if ($_SESSION['role'] == 'office') {
             ?><br>

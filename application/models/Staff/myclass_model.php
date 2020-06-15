@@ -2,10 +2,10 @@
 
 class myclass_model extends CI_Model
 {
-    function fetch_a_class($branch_in_charge, $sem_in__charge)
+    function fetch_a_class($branch_in_charge, $batch_in__charge)
     {
         $this->db->where('branch', $branch_in_charge);
-        $this->db->where('semester', $sem_in__charge);
+        $this->db->where('batch', $batch_in__charge);
         $this->db->from('student_basics');
         $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
         $query = $this->db->get();
