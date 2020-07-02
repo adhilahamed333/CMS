@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2020 at 01:06 PM
+-- Generation Time: Jul 02, 2020 at 06:57 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -116,7 +116,8 @@ INSERT INTO `flows` (`id`, `request_id`, `submit`, `submit_date`, `advisor`, `ad
 (75, 88, 1, '2020-04-05 20:24:46', 1, 'deepa_advisor', '', '2020-04-05 20:25:29', 1, 'madhu_hod', 'done', '2020-04-14 12:08:11', 1, 'principal', 'done', '2020-04-14 12:08:31', 1, 'office_1', '', '2020-04-14 12:09:25', 1, 'Testimonials to be returned', '2020-04-14 14:41:19', 1, '2020-04-14 14:45:44', 1, '2020-04-14 14:45:44'),
 (76, 89, 1, '2020-04-07 14:05:15', 1, 'anju_advisor', '', '2020-04-14 14:48:27', 1, 'madhu_hod', '', '2020-04-14 14:48:36', 1, 'principal', '', '2020-04-14 14:48:47', 1, 'office_2', '', '2020-04-14 14:49:07', 1, 'Testimonials must be returned', '2020-04-14 14:49:10', 1, '2020-04-14 14:49:25', 1, '2020-04-14 15:04:19'),
 (77, 90, 1, '2020-06-15 11:33:22', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
-(78, 91, 1, '2020-06-15 11:35:08', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL);
+(78, 91, 1, '2020-06-15 11:35:08', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL),
+(79, 92, 1, '2020-06-19 18:01:49', 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', '', NULL, 0, '', NULL, 0, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,7 +162,9 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`mid`, `fromuser`, `touser`, `time`, `readtime`, `subject`, `message`) VALUES
 (10, 'ABHI01', 'adhil', '2020-05-28 20:06:46', '2020-05-28 20:07:20', 'bj', 'asgjmskgdm;'),
-(11, 'adhil', 'ABHI01', '2020-05-28 20:08:01', '2020-05-28 20:08:19', 'njlnlkKNL', 'KNLKN;K');
+(11, 'adhil', 'ABHI01', '2020-05-28 20:08:01', '2020-05-28 20:08:19', 'njlnlkKNL', 'KNLKN;K'),
+(12, 'adhil', 'anju_advisor', '2020-06-15 19:14:53', '2020-06-15 19:15:20', 'bj', 'jnbknlnkln;m;km;'),
+(13, 'office_1', 'office_2', '2020-06-19 17:47:36', '2020-06-19 17:48:09', 'zsnvkl', 'ksdnglksneglkn');
 
 -- --------------------------------------------------------
 
@@ -235,7 +238,8 @@ INSERT INTO `requests` (`request_id`, `type`, `owner`, `reason`, `remarks`, `ret
 (88, 'Refund of fees', 6079, 'Scholarship', 'hekllo', 1, 0, '0', '0000-00-00 00:00:00'),
 (89, 'Recommendation for scholorchip, etc.', 6079, 'khkuhh', 'chummaa', 1, 1, 'Testimonials returned', '2020-04-14 15:04:19'),
 (90, 'Bona fide studentship', 6079, 'Scholarship', 'none', 0, 0, '', NULL),
-(91, 'Bona fide studentship', 6079, 'Scholarship', 'none', 0, 0, '', NULL);
+(91, 'Bona fide studentship', 6079, 'Scholarship', 'none', 0, 0, '', NULL),
+(92, 'Transfer', 6079, 'khkuhh', 'hekllo', 0, 0, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1696,8 +1700,7 @@ INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (12024, 'IDK16CS002', 'PH100', 'B'),
 (12025, 'IDK16CS002', 'BE110', 'A'),
 (12026, 'IDK16CS002', 'BE102', 'B+'),
-(12027, 'IDK16CS002', 'CE100', '');
-INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
+(12027, 'IDK16CS002', 'CE100', ''),
 (12028, 'IDK16CS002', 'EC100', 'B+'),
 (12029, 'IDK16CS002', 'PH110', 'A+'),
 (12030, 'IDK16CS002', 'CE110', ''),
@@ -3111,8 +3114,7 @@ INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (13438, 'IDK16CS016', 'CS341', 'A'),
 (13439, 'IDK16CS016', 'CS331', 'A+'),
 (13440, 'IDK16CS016', 'CS333', 'O'),
-(13441, 'IDK16CS016', 'CS361', 'A');
-INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
+(13441, 'IDK16CS016', 'CS361', 'A'),
 (13442, 'IDK16CS019', 'CS301', 'C'),
 (13443, 'IDK16CS019', 'CS303', 'B'),
 (13444, 'IDK16CS019', 'CS305', 'B'),
@@ -4417,7 +4419,7 @@ ALTER TABLE `doc_path`
 -- AUTO_INCREMENT for table `flows`
 --
 ALTER TABLE `flows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `hod_details`
@@ -4429,7 +4431,7 @@ ALTER TABLE `hod_details`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `office_details`
@@ -4447,7 +4449,7 @@ ALTER TABLE `principal_details`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `request_types`
