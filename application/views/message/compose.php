@@ -4,14 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <div class="login col-sm-10 text-center" style="float:left;overflow-y:auto;height:100%;">
     <div class="dashbox">
         <h2>Compose Message</h2>
-        <div class="item-card text-center"><br>
+        <div class="item-card text-center">
             <?php echo form_open('message/send'); ?>
             <div class="form-group">
-                <label for="reason" style="margin-right:25px">From:</label>
+                <label for="from" style="margin-right:25px">From:</label>
                 <input type="text" name="from" value="<?= $_SESSION['username'] ?>" readonly style="width: 80%;height:50px"><br>
             </div>
             <div class="form-group">
-                <label for="request" style="margin-right:44px">To:</label>
+                <label for="to" style="margin-right:44px">To:</label>
                 <select name="to" style="width: 80%;height:50px" required>
                     <option></option>
                     <?php if ($students || $advisors || $hods || $principals || $office) {
@@ -34,13 +34,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </select><br>
             </div>
             <div class="form-group">
-                <label for="reason" style="margin-right:9px">Subject:</label>
+                <label for="sunject" style="margin-right:9px">Subject:</label>
                 <input type="text" name="subject" style="width: 80%;height:50px" required><br>
             </div>
-            <div class="form-group">
-                <label for="reason" style="margin-right:855px">Message:</label><br>
-                <textarea name="message" style="margin-left: 70px;width: 80%;height:120px" required></textarea><br>
-            </div>
+            <p class="form-group">
+                <label for="message" >Message:</label>
+                <textarea name="message" rows="5" style="vertical-align: middle;width: 80%" required></textarea><br>
+            </p>
             <input type="submit" name="send" value="Send" class="btn btn-primary" style="margin: 8px">
             </form>
         </div>

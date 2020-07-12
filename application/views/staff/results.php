@@ -15,8 +15,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
         <div class="item-card">
             <h3>View Results</h3>
-            <?php echo form_open_multipart('result'); ?>
             <div class="form-group">
+                <?php echo form_open_multipart('result'); ?>
                 <label for="semester">Semester:</label>
                 <select name="semester" required>
                     <option value="">Select Semester:</option>

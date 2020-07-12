@@ -120,14 +120,14 @@ class Admin extends CI_Controller
 
         if ($password == $cpassword) {
             $this->admin_model->insert_users($users);
-            $this->admin_model->insert_basics($basics);
+            $this->admin_model->insert_sbasics($basics);
             $this->admin_model->insert_personals($personals);
             $this->admin_model->insert_familys($family);
             $this->admin_model->insert_admissions($admission);
             $this->admin_model->insert_hostels($hostel);
             $this->admin_model->insert_academic_entrys($academic_entry);
             $this->admin_model->insert_academic_exits($academic_exits);
-            redirect('admin/student_inserted');
+            redirect('admin/record_inserted');
         } else {
             $content['error_msg'] = "Passwords Do Not Match";
             $this->load->view('templates/header.php');
@@ -137,11 +137,187 @@ class Admin extends CI_Controller
         }
     }
 
-    public function student_inserted()
+    public function record_inserted()
     {
         $this->load->view('templates/header.php');
         $this->load->view('templates/sidebar.php');
-        $this->load->view('admin/student_inserted.php');
+        $this->load->view('admin/record_inserted.php');
         $this->load->view('templates/footer.php');
     }
+
+    public function advisor()
+    {
+        $password = md5($this->input->post('password'));
+        $cpassword = md5($this->input->post('cpassword'));
+        $users = array(
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
+            'role' => 'advisor',
+        );
+        
+
+        $basics = array(
+            'username' => $this->input->post('username'),
+            'name' => $this->input->post('name'),
+            'staff_id' => $this->input->post('staff_id'),
+            'branch_in_charge' => $this->input->post('branch_in_charge'),
+            'batch_in_charge' => $this->input->post('batch_in_charge'),
+        );
+        if ($password == $cpassword) {
+            $this->admin_model->insert_users($users);
+            $this->admin_model->insert_abasics($basics);
+           
+            redirect('admin/record_inserted');
+        } else {
+            $content['error_msg'] = "Passwords Do Not Match";
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('admin/advisor.php', $content);
+            $this->load->view('templates/footer.php');
+        }
+    }
+
+    public function hod()
+    {
+        $password = md5($this->input->post('password'));
+        $cpassword = md5($this->input->post('cpassword'));
+        $users = array(
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
+            'role' => 'hod',
+        );
+        
+
+        $basics = array(
+            'username' => $this->input->post('username'),
+            'name' => $this->input->post('name'),
+            'staff_id' => $this->input->post('staff_id'),
+            'branch_in_charge' => $this->input->post('branch_in_charge'),
+        );
+        if ($password == $cpassword) {
+            $this->admin_model->insert_users($users);
+            $this->admin_model->insert_hbasics($basics);
+           
+            redirect('admin/record_inserted');
+        } else {
+            $content['error_msg'] = "Passwords Do Not Match";
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('admin/advisor.php', $content);
+            $this->load->view('templates/footer.php');
+        }
+    }
+
+    public function principal()
+    {
+        $password = md5($this->input->post('password'));
+        $cpassword = md5($this->input->post('cpassword'));
+        $users = array(
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
+            'role' => 'principal',
+        );
+        
+
+        $basics = array(
+            'username' => $this->input->post('username'),
+            'name' => $this->input->post('name'),
+            'staff_id' => $this->input->post('staff_id'),
+        );
+        if ($password == $cpassword) {
+            $this->admin_model->insert_users($users);
+            $this->admin_model->insert_pbasics($basics);
+           
+            redirect('admin/record_inserted');
+        } else {
+            $content['error_msg'] = "Passwords Do Not Match";
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('admin/advisor.php', $content);
+            $this->load->view('templates/footer.php');
+        }
+    }
+
+    public function office()
+    {
+        $password = md5($this->input->post('password'));
+        $cpassword = md5($this->input->post('cpassword'));
+        $users = array(
+            'username' => $this->input->post('username'),
+            'password' => md5($this->input->post('password')),
+            'role' => 'office',
+        );
+        
+
+        $basics = array(
+            'username' => $this->input->post('username'),
+            'name' => $this->input->post('name'),
+            'staff_id' => $this->input->post('staff_id'),
+            'section_in_charge' => $this->input->post('section_in_charge'),
+        );
+        if ($password == $cpassword) {
+            $this->admin_model->insert_users($users);
+            $this->admin_model->insert_obasics($basics);
+           
+            redirect('admin/record_inserted');
+        } else {
+            $content['error_msg'] = "Passwords Do Not Match";
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('admin/advisor.php', $content);
+            $this->load->view('templates/footer.php');
+        }
+    }
+
+    public function add_sub()
+    {
+        if (isset($_SESSION['username'])) {
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $content["error_msg"] = "";
+            $this->load->view('admin/add_sub', $content);
+            $this->load->view('templates/footer.php');
+        } else {
+            redirect('home');
+        }
+    }
+
+    public function sub()
+    {
+
+        $subs = array(
+            'course_code' => $this->input->post('course_code'),
+            'course_name' => $this->input->post('course_name'),
+            'semester' => $this->input->post('sem'),
+            'credits' => $this->input->post('credit'),
+            'slot' => $this->input->post('slot')
+        );
+        $this->admin_model->insert_subs($subs);
+        redirect('admin/record_inserted');
+    }
+
+    public function add_req()
+    {
+        if (isset($_SESSION['username'])) {
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $content["error_msg"] = "";
+            $this->load->view('admin/add_req', $content);
+            $this->load->view('templates/footer.php');
+        } else {
+            redirect('home');
+        }
+    }
+
+    public function req()
+    {
+
+        $req = array(
+            'type' => $this->input->post('type'),
+            'section' => $this->input->post('section')
+        );
+        $this->admin_model->insert_req($req);
+        redirect('admin/record_inserted');
+    }
+
 }

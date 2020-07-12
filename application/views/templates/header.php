@@ -28,11 +28,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
         .navbar {
             margin-bottom: 0;
             border-radius: 0;
+
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
         .row.content {
-            height: 545px
+            height: 83vh;
         }
 
         /* Set gray background color and 100% height */
@@ -47,6 +48,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             background-color: #555;
             color: white;
             padding: 15px;
+            
         }
 
         /* On small screens, set height to 'auto' for sidenav and grid */
@@ -98,14 +100,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <?php echo "<li>" . form_open('home/logout'); ?>
 
                         <input type="submit" name="submit" value="Logout" class="btn btn-primary" style="margin: 8px"></li>
-                        </form></ul>
-                        <div class="nav navbar-nav navbar-right">
-                            <a class="msgread" href="<?php echo base_url(); ?>message"></a>
-                        </div>
-                    <?php } else {
+                        </form>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
+                    <a class="msgread" href="<?php echo base_url(); ?>message"></a>
+                </div>
+            <?php } else {
                         echo '<li><a href="' . base_url() . 'home/login">Login</a></li></ul>';
                     } ?>
-                
+
 
             </div>
         </div>

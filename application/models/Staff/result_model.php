@@ -44,11 +44,17 @@ class result_model extends CI_Model
     {
         $this->db->select('DISTINCT(results.university_reg_no)');
         $this->db->select('student_basics.admission_no');
-        $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
         $this->db->where('subjects.semester', $semester);
         $this->db->from('results');
         $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
         $this->db->join('subjects', 'results.course_code=subjects.course_code');
+        $this->db->order_by('student_basics.university_reg_no', 'ASC');
         $query = $this->db->get();
         $result = $query->result();
         return $result;
@@ -70,16 +76,6 @@ class result_model extends CI_Model
         return $result;
     }
 
-    public function fetch_no_subjects($semester)
-    {
-        $this->db->select('COUNT(DISTINCT(course_code)) as c');
-        $this->db->where('semester', $semester);
-        $this->db->from('subjects');
-        $query = $this->db->get();
-        $row = $query->row();
-        return $row->c;
-    }
-
     public function fetch_subjects($semester)
     {
 
@@ -95,6 +91,21 @@ class result_model extends CI_Model
     public function fetch_myresults($admission_no)
     {
         $this->db->where('admission_no', $admission_no);
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $this->db->join('subjects', 'results.course_code=subjects.course_code');
+        $this->db->order_by('subjects.semester', 'ASC');
+        $this->db->order_by('subjects.slot', 'ASC');
+        $this->db->order_by('subjects.course_code', 'DESC');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+    public function fetch_myfails($admission_no)
+    {
+        $this->db->where('admission_no', $admission_no);
+        $this->db->where('grade', "F");
         $this->db->from('results');
         $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
         $this->db->join('subjects', 'results.course_code=subjects.course_code');
@@ -184,5 +195,210 @@ class result_model extends CI_Model
         $query = $this->db->get();
         $row = $query->row();
         return $row->cgpa;
+    }
+
+    public function subject_total($course_code)
+    {
+        $this->db->select('COUNT(*) as total');
+        $this->db->select('course_code');
+        $this->db->where('course_code', $course_code);
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_o($course_code)
+    {
+        $this->db->select('COUNT(*) as o');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "O");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_ap($course_code)
+    {
+        $this->db->select('COUNT(*) as ap');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "A+");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_a($course_code)
+    {
+        $this->db->select('COUNT(*) as a');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "A");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_bp($course_code)
+    {
+        $this->db->select('COUNT(*) as bp');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "B+");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_b($course_code)
+    {
+        $this->db->select('COUNT(*) as b');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "B");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_c($course_code)
+    {
+        $this->db->select('COUNT(*) as c');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "C");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_p($course_code)
+    {
+        $this->db->select('COUNT(*) as p');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "P");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_f($course_code)
+    {
+        $this->db->select('COUNT(*) as f');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "F");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_fe($course_code)
+    {
+        $this->db->select('COUNT(*) as fe');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "FE");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_i($course_code)
+    {
+        $this->db->select('COUNT(*) as i');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "I");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
+    }
+    public function subject_ab($course_code)
+    {
+        $this->db->select('COUNT(*) as ab');
+        $this->db->where('course_code', $course_code);
+        $this->db->where('grade', "Absent");
+        if (isset($_SESSION['batch_in_charge'])) {
+            $this->db->where('student_basics.batch', $_SESSION['batch_in_charge']);
+        }
+        if (isset($_SESSION['branch_in_charge'])) {
+            $this->db->where('student_basics.branch', $_SESSION['branch_in_charge']);
+        }
+        $this->db->from('results');
+        $this->db->join('student_basics', 'results.university_reg_no=student_basics.university_reg_no');
+        $query = $this->db->get();
+        $result = $query->row();
+        return $result;
     }
 }

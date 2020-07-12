@@ -8,6 +8,7 @@ class myclass_model extends CI_Model
         $this->db->where('batch', $batch_in__charge);
         $this->db->from('student_basics');
         $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
+        $this->db->order_by('student_basics.university_reg_no', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }
@@ -17,6 +18,7 @@ class myclass_model extends CI_Model
         $this->db->where('branch', $branch_in_charge);
         $this->db->from('student_basics');
         $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
+        $this->db->order_by('student_basics.university_reg_no', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }
@@ -25,6 +27,7 @@ class myclass_model extends CI_Model
     {
         $this->db->from('student_basics');
         $this->db->join('student_personals', 'student_basics.admission_no=student_personals.admission_no');
+        $this->db->order_by('student_basics.university_reg_no', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }

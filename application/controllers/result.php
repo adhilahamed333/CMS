@@ -17,23 +17,52 @@ class result extends CI_Controller
     public function index()
     {
         if (isset($_SESSION['username'])) {
-            $semester = $this->input->post('semester');
-            $content['regs'] = $this->result_model->fetch_regs($semester);
+            $content['semester'] = $this->input->post('semester');
+            $content['regs'] = $this->result_model->fetch_regs($content['semester']);
+            $content['results'] = null;
             foreach ($content['regs'] as $reg) {
-
-                $content['results'][$reg->university_reg_no] = $this->result_model->fetch_myresults($reg->admission_no);
-                
+                $content['results'][$reg->university_reg_no] = $this->result_model->fetch_myresults($reg->admission_no, $content['semester']);
+                $content['sem'][$reg->university_reg_no] = $this->result_model->fetch_sgpa($reg->admission_no);
+                $content['fails'][$reg->university_reg_no] = $this->result_model->fetch_myfails($reg->admission_no, $content['semester']);
             }
-            $content['subjects'] = $this->result_model->fetch_subjects($semester);
-            $content['c'] = $this->result_model->fetch_no_subjects($semester);
-
+            $content['subjects'] = $this->result_model->fetch_subjects($content['semester']);
             $this->load->view('templates/header.php');
             $this->load->view('templates/sidebar.php');
-            $this->load->view('staff/result_analysis.php', $content);
+            if ($content['results']) {
+                $this->load->view('staff/result_analysis.php', $content);
+            }
             $this->load->view('templates/footer.php');
         } else {
             redirect('home/login');
         }
+    }
+
+    public function subwise($semester)
+    {
+        if (!isset($_SESSION['username'])) {
+            redirect('home/dash');
+        }
+        $content['semester'] =$semester;
+        $content['subjects'] = $this->result_model->fetch_subjects($semester);
+        $content['subjectwise']=null;
+        foreach ($content['subjects'] as $subject) {
+            $content['subjectwise'][$subject->course_code]["total"] = $this->result_model->subject_total($subject->course_code);
+            $content['subjectwise'][$subject->course_code]["o"] = $this->result_model->subject_o($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['ap'] = $this->result_model->subject_ap($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['a'] = $this->result_model->subject_a($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['bp'] = $this->result_model->subject_bp($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['b'] = $this->result_model->subject_b($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['c'] = $this->result_model->subject_c($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['p'] = $this->result_model->subject_p($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['f'] = $this->result_model->subject_f($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['fe'] = $this->result_model->subject_fe($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['i'] = $this->result_model->subject_i($subject->course_code);
+            $content['subjectwise'][$subject->course_code]['ab'] = $this->result_model->subject_ab($subject->course_code);
+        }
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/sidebar.php');
+        $this->load->view('staff/subjectwise.php', $content);
+        $this->load->view('templates/footer.php');
     }
 
     public function result_upload()
@@ -47,6 +76,7 @@ class result extends CI_Controller
         $this->load->view('staff/result_upload.php');
         $this->load->view('templates/footer.php');
     }
+
     public function readfile()
     {
         if (!isset($_SESSION['username'])) {

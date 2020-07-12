@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2020 at 06:57 AM
+-- Generation Time: Jul 12, 2020 at 04:23 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -1700,7 +1700,8 @@ INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (12024, 'IDK16CS002', 'PH100', 'B'),
 (12025, 'IDK16CS002', 'BE110', 'A'),
 (12026, 'IDK16CS002', 'BE102', 'B+'),
-(12027, 'IDK16CS002', 'CE100', ''),
+(12027, 'IDK16CS002', 'CE100', '');
+INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (12028, 'IDK16CS002', 'EC100', 'B+'),
 (12029, 'IDK16CS002', 'PH110', 'A+'),
 (12030, 'IDK16CS002', 'CE110', ''),
@@ -3114,7 +3115,8 @@ INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (13438, 'IDK16CS016', 'CS341', 'A'),
 (13439, 'IDK16CS016', 'CS331', 'A+'),
 (13440, 'IDK16CS016', 'CS333', 'O'),
-(13441, 'IDK16CS016', 'CS361', 'A'),
+(13441, 'IDK16CS016', 'CS361', 'A');
+INSERT INTO `results` (`id`, `university_reg_no`, `course_code`, `grade`) VALUES
 (13442, 'IDK16CS019', 'CS301', 'C'),
 (13443, 'IDK16CS019', 'CS303', 'B'),
 (13444, 'IDK16CS019', 'CS305', 'B'),
@@ -4169,7 +4171,12 @@ INSERT INTO `subjects` (`id`, `course_code`, `course_name`, `semester`, `credits
 (87, 'ME482', 'Energy Conservation and Management', 8, 3, 'D'),
 (88, 'CS492 ', 'Project', 8, 6, 'S'),
 (89, 'CS463', 'Cloud Computing', 7, 3, 'F'),
-(90, 'CS364', 'Mobile Computing', 6, 3, 'F');
+(90, 'CS364', 'Mobile Computing', 6, 3, 'F'),
+(92, 'sdg', 'dsg', 5, 3, 's'),
+(93, 't1', 't1', 9, 1, 'a'),
+(94, 't2', 't2', 9, 1, 'b'),
+(95, 't3', 't3', 9, 1, 'c'),
+(96, 't4', 't4', 9, 1, 'd');
 
 -- --------------------------------------------------------
 
@@ -4407,7 +4414,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `advisor_details`
 --
 ALTER TABLE `advisor_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `doc_path`
@@ -4425,7 +4432,7 @@ ALTER TABLE `flows`
 -- AUTO_INCREMENT for table `hod_details`
 --
 ALTER TABLE `hod_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -4437,7 +4444,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `office_details`
 --
 ALTER TABLE `office_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `principal_details`
@@ -4461,7 +4468,7 @@ ALTER TABLE `request_types`
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13862;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13870;
 
 --
 -- AUTO_INCREMENT for table `student_academic_entrys`
@@ -4509,13 +4516,13 @@ ALTER TABLE `student_personals`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- Constraints for dumped tables
