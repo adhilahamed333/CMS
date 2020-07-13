@@ -62,6 +62,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 height: auto;
             }
         }
+
     </style>
 </head>
 

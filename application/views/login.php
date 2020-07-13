@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <input type="submit" name="submit" value="Login" class="btn btn-primary">
     </div>
     </form>
-    
+
 
 </div>
 <div class="login col-sm-3 text-center"></div>
