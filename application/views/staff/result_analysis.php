@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <a href="result/subwise/<?php echo $semester; ?>" class="btn btn-primary">View Subject-wise Analysis</a>
         <h3>Student-wise Result Analysis(S<?= $semester ?>)</h3>
         <div class="item-card" style="width:inherit;overflow-y:auto;height:405px;">
-            <table border="1">
+            <table class="table display table-striped table-bordered" style="width:100%">
 
                 <?php
                 if ($results) { ?>

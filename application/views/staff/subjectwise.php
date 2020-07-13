@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="dashbox">
         <h3>Subject-wise Result Analysis(S<?= $semester ?>)</h3>
         <div class="item-card" style="width:inherit;overflow-y:auto;height:438px;">
-            <table border="1">
+            <table class="table display table-striped table-bordered" style="width:100%">
             <colgroup>
                     <col style="width:16%">
                     <col style="width:6%">
