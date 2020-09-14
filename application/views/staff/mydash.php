@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <div class="login col-sm-10 text-center" class="float:left;overflow-y:auto;height:100%;">
     <div class="dashbox" style="padding-bottom: 10px">
         <h4>Requests</h4>
-        <div style="width:inherit;overflow-y:auto;height:240px;">
+        <div style="width:inherit;overflow-y:auto;height:37vh;">
             <?php if ($myrequests) {
                 foreach ($myrequests as $myrequest) { ?>
 
@@ -99,7 +99,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="dashbox">
         <h4>Documents</h4>
         <div>
-            <div style="width:99%;float:none;overflow-y:auto;height:140px;">
+            <div style="width:99%;float:none;overflow-y:auto;height:20vh;">
                 <?php if ($mydocs) {
                     foreach ($mydocs as $mydoc) { ?>
 

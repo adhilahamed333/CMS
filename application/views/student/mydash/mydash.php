@@ -25,7 +25,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             }
                             if (($myrequest->submit == 1 && $myrequest->advisor != 1 && $myrequest->advisor != -1)) {
                                 echo form_open_multipart('student/withdraw_remark');
-                                echo '<div><input type="hidden" name="arequest_id" value=' . $myrequest->request_id . '><input type="text" name="remark"><br><input type="submit" value="Withdraw" class="btn btn-primary"></form></div>';
+                                echo '<div><input type="hidden" name="arequest_id" value=' . $myrequest->request_id . '><input type="text" name="remark" class="btn btn-default"><input type="submit" value="Withdraw" class="btn btn-primary"></form></div>';
                             } ?>
 
                         </div>

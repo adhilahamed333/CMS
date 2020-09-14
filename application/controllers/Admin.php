@@ -154,7 +154,7 @@ class Admin extends CI_Controller
             'password' => md5($this->input->post('password')),
             'role' => 'advisor',
         );
-        
+
 
         $basics = array(
             'username' => $this->input->post('username'),
@@ -166,7 +166,7 @@ class Admin extends CI_Controller
         if ($password == $cpassword) {
             $this->admin_model->insert_users($users);
             $this->admin_model->insert_abasics($basics);
-           
+
             redirect('admin/record_inserted');
         } else {
             $content['error_msg'] = "Passwords Do Not Match";
@@ -186,7 +186,7 @@ class Admin extends CI_Controller
             'password' => md5($this->input->post('password')),
             'role' => 'hod',
         );
-        
+
 
         $basics = array(
             'username' => $this->input->post('username'),
@@ -197,7 +197,7 @@ class Admin extends CI_Controller
         if ($password == $cpassword) {
             $this->admin_model->insert_users($users);
             $this->admin_model->insert_hbasics($basics);
-           
+
             redirect('admin/record_inserted');
         } else {
             $content['error_msg'] = "Passwords Do Not Match";
@@ -217,7 +217,7 @@ class Admin extends CI_Controller
             'password' => md5($this->input->post('password')),
             'role' => 'principal',
         );
-        
+
 
         $basics = array(
             'username' => $this->input->post('username'),
@@ -227,7 +227,7 @@ class Admin extends CI_Controller
         if ($password == $cpassword) {
             $this->admin_model->insert_users($users);
             $this->admin_model->insert_pbasics($basics);
-           
+
             redirect('admin/record_inserted');
         } else {
             $content['error_msg'] = "Passwords Do Not Match";
@@ -247,7 +247,7 @@ class Admin extends CI_Controller
             'password' => md5($this->input->post('password')),
             'role' => 'office',
         );
-        
+
 
         $basics = array(
             'username' => $this->input->post('username'),
@@ -258,7 +258,7 @@ class Admin extends CI_Controller
         if ($password == $cpassword) {
             $this->admin_model->insert_users($users);
             $this->admin_model->insert_obasics($basics);
-           
+
             redirect('admin/record_inserted');
         } else {
             $content['error_msg'] = "Passwords Do Not Match";
@@ -320,4 +320,63 @@ class Admin extends CI_Controller
         redirect('admin/record_inserted');
     }
 
+    public function reset_pass()
+    {
+        if (isset($_SESSION['username'])) {
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $content["error_msg"] = "";
+            $this->load->model('message_model');
+            $content['students'] = $this->message_model->fetch_students($_SESSION['username']);
+            $content['advisors'] = $this->message_model->fetch_advisors($_SESSION['username']);
+            $content['hods'] = $this->message_model->fetch_hods($_SESSION['username']);
+            $content['principals'] = $this->message_model->fetch_principals($_SESSION['username']);
+            $content['office'] = $this->message_model->fetch_office($_SESSION['username']);
+            $this->load->view('admin/reset_pass', $content);
+            $this->load->view('templates/footer.php');
+        } else {
+            redirect('home');
+        }
+    }
+
+    public function reset()
+    {
+        $apassword = md5($this->input->post('apassword'));
+        $this->load->model('users_model');
+        $is_valid = $this->users_model->validate($_SESSION['username'], $apassword);
+        if ($is_valid) {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $cpassword = $this->input->post('cpassword');
+            if ($password == $cpassword && $password != '' && $cpassword != '') {
+                $password = md5($password);
+                $this->users_model->update_password($username, $password);
+                echo "****";
+            } else {
+                $content['error_msg'] = "Passwords Do Not Match";
+                $this->load->model('message_model');
+                $content['students'] = $this->message_model->fetch_students($_SESSION['username']);
+                $content['advisors'] = $this->message_model->fetch_advisors($_SESSION['username']);
+                $content['hods'] = $this->message_model->fetch_hods($_SESSION['username']);
+                $content['principals'] = $this->message_model->fetch_principals($_SESSION['username']);
+                $content['office'] = $this->message_model->fetch_office($_SESSION['username']);
+                $this->load->view('templates/header.php');
+                $this->load->view('templates/sidebar.php');
+                $this->load->view('admin/reset_pass.php', $content);
+                $this->load->view('templates/footer.php');
+            }
+        } else {
+            $content['error_msg'] = "Admin Password Incorrect";
+            $this->load->model('message_model');
+            $content['students'] = $this->message_model->fetch_students($_SESSION['username']);
+            $content['advisors'] = $this->message_model->fetch_advisors($_SESSION['username']);
+            $content['hods'] = $this->message_model->fetch_hods($_SESSION['username']);
+            $content['principals'] = $this->message_model->fetch_principals($_SESSION['username']);
+            $content['office'] = $this->message_model->fetch_office($_SESSION['username']);
+            $this->load->view('templates/header.php');
+            $this->load->view('templates/sidebar.php');
+            $this->load->view('admin/reset_pass.php', $content);
+            $this->load->view('templates/footer.php');
+        }
+    }
 }

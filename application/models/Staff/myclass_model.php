@@ -171,4 +171,86 @@ class myclass_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    function update_sbasics($data)
+    {
+        $this->db->set('branch', $data['branch']);
+        $this->db->set('semester', $data['semester']);
+        $this->db->set('date_of_joining', $data['date_of_joining']);
+        $this->db->set('university_reg_no', $data['university_reg_no']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_basics');
+    }
+
+    function update_spersonals($data)
+    {
+        $this->db->set('name', $data['name']);
+        $this->db->set('gender', $data['gender']);
+        $this->db->set('phone', $data['phone']);
+        $this->db->set('mobile', $data['mobile']);
+        $this->db->set('address', $data['address']);
+        $this->db->set('email', $data['email']);
+        $this->db->set('category', $data['category']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_personals');
+    }
+
+    function update_sfamilys($data)
+    {
+        $this->db->set('name_of_fm', $data['name_of_fm']);
+        $this->db->set('occupation_of_fm', $data['occupation_of_fm']);
+        $this->db->set('phone_of_fm', $data['phone_of_fm']);
+        $this->db->set('address_of_fm', $data['address_of_fm']);
+        $this->db->set('email_of_fm', $data['email_of_fm']);
+        $this->db->set('name_of_lg', $data['name_of_lg']);
+        $this->db->set('occupation_of_lg', $data['occupation_of_lg']);
+        $this->db->set('phone_of_lg', $data['phone_of_lg']);
+        $this->db->set('address_of_lg', $data['address_of_lg']);
+        $this->db->set('email_of_lg', $data['email_of_lg']);
+        $this->db->set('relation_withlg', $data['relation_with_lg']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_familys');
+    }
+
+    function update_admissions($data)
+    {
+        $this->db->set('date_of_admission', $data['date_of_admission']);
+        $this->db->set('adcard_memo_no', $data['adcard_memo_no']);
+        $this->db->set('rank', $data['rank']);
+        $this->db->set('category_admission', $data['category_admission']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_admissions');
+    }
+
+    function update_hostels($data)
+    {
+        $this->db->set('hostel_name', $data['hostel_name']);
+        $this->db->set('date_of_admission', $data['date_of_admission']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_admissions');
+    }
+
+    function update_acadamic_entrys($data)
+    {
+        $this->db->set('qualifying_exam', $data['qualifying_exam']);
+        $this->db->set('period_of_study', $data['period_of_study']);
+        $this->db->set('name_of_institution', $data['name_of_institution']);
+        $this->db->set('university_or_board', $data['university_or_board']);
+        $this->db->set('total_marks_secured', $data['total_marks_secured']);
+        $this->db->set('max_mark', $data['max_mark']);
+        $this->db->set('tc_or_cc_no', $data['tc_or_cc_no']);
+        $this->db->set('date_of_tc_or_cc', $data['date_of_tc_or_cc']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_admissions');
+    }
+
+    function update_acadamic_exits($data)
+    {
+        $this->db->set('year_of_graduation', $data['year_of_graduation']);
+        $this->db->set('conduct_and_chara', $data['conduct_and_chara']);
+        $this->db->set('rank_in_class', $data['rank_in_class']);
+        $this->db->set('remarks', $data['remarks']);
+        $this->db->where('admission_no', $data['admission_no']);
+        $this->db->update('student_admissions');
+    }
 }

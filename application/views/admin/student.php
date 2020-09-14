@@ -63,7 +63,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
             <div class="form-group">
                 <label>Phone:</label>
-                <input type="text" name="phone" ><br>
+                <input type="text" name="phone"><br>
             </div>
             <div class="form-group">
                 <label>Mobile:</label>
@@ -180,7 +180,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <input type="text" name="univercity_or_board" required><br>
             </div>
             <div class="form-group">
-                <label>t=Total Marks Secured:</label>
+                <label>Total Marks Secured:</label>
                 <input type="text" name="total_marks_secured" required><br>
             </div>
             <div class="form-group">

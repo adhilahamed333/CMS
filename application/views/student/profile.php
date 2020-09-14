@@ -2,10 +2,11 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-10 text-left">
+<div class="login col-sm-10 text-left" style="height: 83vh;float:left;overflow-y:auto;height:100%;">
     <div class="dashbox">
         <h1>Profile</h1>
         <div class="item-card">
+        
             <h3><a href="<?php echo base_url(); ?>student/sbasics">Basics</a></h3>
             <h3><a href="<?php echo base_url(); ?>student/spersonal">Personal</a></h3>
             <h3><a href="<?php echo base_url(); ?>student/sfamily">Family</a></h3>

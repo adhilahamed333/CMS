@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-8 text-left">
+<div class="login col-10 text-left">
     <h5><a href="<?php echo base_url() . 'staff/mystudent/' . $family['admission_no']; ?>">Profile</a></h5>
     <h3>Family</h3>
     <h9>Name of Father/Mother:</h9>

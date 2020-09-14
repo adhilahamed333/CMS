@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-8 text-left">
+<div class="login col-sm-10 text-left">
     <h5><a href="<?php echo base_url() . 'staff/mystudent/' . $acadexit['admission_no']; ?>">Profile</a></h5>
     <div class="dashbox">
         <h3>Acadamic Exit Level</h3>

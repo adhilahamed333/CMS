@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if ($sem['sgpa'][$i] != null) { ?>
                     <div class="item-card">
                         <h3>S<?= $i ?></h3>
-                        <table align="center" border="1" style="width: 600px">
+                        <table align="center" class="table display table-striped table-bordered" border="1" style="width: 600px">
                             <tr>
                                 <th>Slot</th>
                                 <th>Course Name</th>

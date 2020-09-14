@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<div class="login col-sm-8 text-left">
+<div class="login col-sm-10 text-left">
 
     <h3><a href="<?php echo base_url(); ?>staff/profile">Profile</a></h3>
     <h3><a href="<?php echo base_url(); ?>mydash">My Dashboard</a></h3>
