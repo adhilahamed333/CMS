@@ -2,7 +2,7 @@
     <div class="dashbox">
         <h4> Upload Results</h4>
         <div class="item-card">
-            <form method="post" enctype="multipart/form-data" action="result/readfile">
+            <form method="post" enctype="multipart/form-data" action="readfile">
                 <div class="form-group">
                     <br>
                     No of Subjects:

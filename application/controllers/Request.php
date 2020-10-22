@@ -31,7 +31,9 @@ class Request extends CI_Controller
             $this->load->view('templates/sidebar.php');
 
             $request = $this->input->post('request');
-            $request = $this->input->post('other') . $request;
+            if($request==NULL)          {
+                $request = $this->input->post('other') . $request;
+            }
             $reason = $this->input->post('reason');
             $remarks = $this->input->post('remarks');
             $u1 = $this->input->post('undertaking1');
