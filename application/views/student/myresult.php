@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div class="dashbox">
         <h3>My Results</h3>
 
-        <div style="width:inherit;overflow-y:auto;height:469px;">
+        <div style="width:inherit;overflow-y:auto;height:428px;">
             <h4>CGPA:<?= $cgpa ?></h4>
             <?php for ($i = 1; $i <= 8; $i++) {
                 if ($sem['sgpa'][$i] != null) { ?>

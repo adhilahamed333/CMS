@@ -13,11 +13,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
             <div class="form-group">
                 <label>Password:</label>
-                <input type="text" name="password" placeholder="password" required><br>
+                <input type="password" name="password" placeholder="password" required><br>
             </div>
             <div class="form-group">
                 <label>Confirm Password:</label>
-                <input type="text" name="cpassword" placeholder="Confirm" required><br>
+                <input type="password" name="cpassword" placeholder="Confirm" required><br>
             </div>
         </div>
         <h3>Basics:</h3>

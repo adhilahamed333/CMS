@@ -128,12 +128,15 @@ class result_model extends CI_Model
         if ($query) {
             $grade_points = array(
                 'O' => 10,
+                'S' => 10,
                 'A+' => 9,
                 'A' => 8.5,
                 'B+' => 8,
-                'B' => 7,
-                'C' => 6,
-                'P' => 5,
+                'B' => 7.5,
+                'C+' => 7,
+                'C' => 6.5,
+                'D' => 6,
+                'P' => 5.5,
                 'F' => 0,
                 'FE' => 0,
                 'I' => 0,

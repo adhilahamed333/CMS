@@ -63,6 +63,7 @@ class Admin extends CI_Controller
             'course' => $this->input->post('course'),
             'branch' => $this->input->post('branch'),
             'semester' => $this->input->post('semester'),
+            'batch' => $this->input->post('batch'),
             'date_of_joining' => $this->input->post('date_of_joining'),
             'university_reg_no' => $this->input->post('univesity_reg_no'),
         );
